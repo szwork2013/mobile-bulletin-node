@@ -1,6 +1,61 @@
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+doctype html
+html.error-page.no-js(lang='')
+  head
+    // meta
+    meta(charset='utf-8')
+    meta(name='description', content='Flat, Clean, Responsive, application admin template built with bootstrap 3')
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1')
+    // /meta
+    title Sublime - Web Application Admin Dashboard
+    // page level plugin styles
+    // /page level plugin styles
+    // core styles
+    link(rel='stylesheet', href='bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/font-awesome.css')
+    link(rel='stylesheet', href='css/themify-icons.css')
+    link(rel='stylesheet', href='css/animate.min.css')
+    // /core styles
+    // template styles
+    link(rel='stylesheet', href='css/skins/palette.css')
+    link(rel='stylesheet', href='css/fonts/font.css')
+    link(rel='stylesheet', href='css/main.css')
+    // template styles
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    // load modernizer
+    script(src='plugins/modernizr.js')
+  // body
+  body.bg-primary
+    // error wrapper
+    .center-wrapper
+      .center-content.text-center
+        .error-number.animated.bounceIn 404
+        .mb25 PAGE NOT FOUND
+        p Sorry, but the page you were trying to view does not exist.
+        pre #{error.stack}
+        .search
+          form.form-inline(role='form')
+            .search-form
+              button.search-button(type='submit', title='Search')
+                i.ti-search
+              input.form-control.no-b(type='text', placeholder='Search Admin Panel')
+        ul.mt25.error-nav
+          li
+            a(href='javascript:;')
+              | ©
+              span#year.mr5
+              | Sublime LLC
+          li
+            a(href='javascript:;') About
+          li
+            a(href='javascript:;') Help
+          li
+            a(href='javascript:;') Status
+    // /error wrapper
+    script(type='text/javascript').
+      var el = document.getElementById("year"),
+      year = (new Date().getFullYear());
+      el.innerHTML = year;
+  // /body
