@@ -1,0 +1,184 @@
+extends layout
+
+block content
+
+    .app
+      // top header
+      header.header.header-fixed.navbar
+        .brand
+          // toggle offscreen menu
+          a.ti-menu.off-left.visible-xs(href='javascript:;', data-toggle='offscreen', data-move='ltr')
+          // /toggle offscreen menu
+          // logo
+          a.navbar-brand(href='index.html')
+            img(src='img/logo.png', alt='')
+            span.heading-font
+              | Sublime
+          // /logo
+        ul.nav.navbar-nav
+          li.hidden-xs
+            // toggle small menu
+            a.toggle-sidebar(href='javascript:;')
+              i.ti-menu
+            // /toggle small menu
+          li.header-search
+            // toggle search
+            a.toggle-search(href='javascript:;')
+              i.ti-search
+            // /toggle search
+            .search-container
+              form(role='search')
+                input.form-control.search(type='text', placeholder='type and press enter')
+        ul.nav.navbar-nav.navbar-right
+          li.off-right
+            a(href='javascript:;', data-toggle='dropdown')
+              img.header-avatar.img-circle(src='img/faceless.jpg', alt='user', title='user')
+              span.hidden-xs.ml10 Gerald Morris
+              i.ti-angle-down.ti-caret.hidden-xs
+            ul.dropdown-menu
+              li
+                a(href='javascript:;') Settings
+              li
+                a(href='javascript:;') Help
+              li
+                a(href='signin.html') Logout
+      // /top header
+      section.layout
+        // sidebar menu
+        aside.sidebar.offscreen-left
+          // main navigation
+          nav.main-navigation(data-height='auto', data-size='6px', data-distance='0', data-rail-visible='true', data-wheel-step='10')
+            p.nav-title MENU
+            ul.nav
+              // dashboard
+              li
+                a(href='index.html')
+                  i.ti-home
+                  span Dashboard
+              // /dashboard
+              li
+                a(href='index.html')
+                  i.ti-email
+                  span Messages
+              li
+                a(href='index.html')
+                  i.ti-user
+                  span Employees
+              li
+                a(href='index.html')
+                  i.ti-briefcase
+                  span Departments
+              li
+                a(href='index.html')
+                  i.ti-help-alt
+                  span Support
+              li
+                a(href='index.html')
+                  i.ti-settings
+                  span Settings
+        // /sidebar menu
+        // main content
+        section.main-content
+          // content wrapper
+          .content-wrap
+            // inner content wrapper
+            .wrapper
+              .row
+                .col-md-4.col-sm-4.col-xs-12
+                  section.dash-tile
+                    .tile-title ALL TIME EMPLOYEE REGISTRATION
+                    .tile-stats
+                      b 0
+                    .progress.progress-xs.mt5.mb10
+                      .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='40', aria-valuemin='0', aria-valuemax='100', style='width: 40%')
+                    .tile-footer
+                      | Compared to total employees
+                .col-md-4.col-sm-4.col-xs-12
+                  section.dash-tile.bg-danger
+                    .tile-title
+                      span.pull-right
+                        i.ti-arrow-circle-up.mr5
+                        | 8%
+                      span ALL TIME MESSAGES
+                    .tile-stats
+                      b 4565
+                    .mb20
+                    .tile-chart.tile-line
+                    .tile-footer
+                      | Percentage is messages delivered
+                .col-md-4.col-sm-4.col-xs-12
+                  section.dash-tile.bg-success
+                    .tile-title TOTAL USSD SESSIONS
+                    .tile-stats
+                      b 89790
+                    .tile-bottom
+                      small
+                        i.ti-arrow-circle-up.mr5
+                        | 4.6% Weekly 
+                        b Change
+                    .tile-footer
+                      | Percentage based on weekly ussd readings
+                    .tile-icon
+                      i.ti-timer
+              .row
+                .col-md-12
+                  .panel.no-b.rounded.overflow-hidden
+                    .panel-body.no-p.bg-primary
+                      .map.clearfix(style='display: block;height: 200px;')
+                      .row.text-center(style='padding: 40px 0;')
+                        .col-xs-6.col-sm-3
+                          span.h4.show.count(data-from='0', data-to='5687', data-interval='50') 0
+                          small.text-uppercase Employees
+                        .col-xs-6.col-sm-3
+                          span.h4.show.count(data-from='0', data-to='78694') 0
+                          small.text-uppercase Reach
+                        .col-xs-6.col-sm-3
+                          span.h4.show.count(data-from='0', data-to='12095') 0
+                          small.text-uppercase USSD Sessions
+                        .col-xs-6.col-sm-3
+                          span.h4.show.count(data-from='0', data-to='9427', data-interval='50') 0
+                          small.text-uppercase Bounce rate
+                    ul.list-group
+                      li.list-group-item.no-b
+                        span.badge.bg-danger 14
+                        |                                             MTN
+                      li.list-group-item
+                        span.badge.bg-success 2
+                        |                                             Vodacom
+                      li.list-group-item
+                        span.badge.bg-warning 1
+                        |                                             Cell C
+              ol.breadcrumb
+                li
+                  a(href='javascript:;') Mobile Bulletin
+                li.active Settings
+              section.panel
+                header.panel-heading Settings
+                .panel-body
+                  form.form-horizontal(role='form')
+                    .col-md-12
+                      .form-group
+                        label.col-sm-2.control-label Company Name
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-12
+                      .form-group
+                        label.col-sm-2.control-label Website
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-12
+                      .form-group
+                        label.col-sm-2.control-label Email
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-12
+                      .form-group
+                        label.col-sm-2.control-label Telephone
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-12
+                      button.btn.btn-default.pull-right(type='submit') Save
+            // /inner content wrapper
+          // /content wrapper
+          a.exit-offscreen
+        // /main content

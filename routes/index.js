@@ -49,6 +49,12 @@ module.exports = function(passport){
 		res.render('admin/support', { message: req.flash('message') });
 	});
     
+    /* GET support page. */
+	router.get('/admin/dashboard', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('admin/dashboard', { message: req.flash('message') });
+	});
+    
     /* GET settings page. */
 	router.get('/admin/settings', function(req, res) {
     	// Display the Login page with any flash message, if any
