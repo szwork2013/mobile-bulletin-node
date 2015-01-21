@@ -38,9 +38,9 @@ module.exports = function(passport){
 	});
     
     /* GET department page. */
-	router.get('/admin/department', function(req, res) {
+	router.get('/admin/departments', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/department', { message: req.flash('message') });
+		res.render('admin/departments', { message: req.flash('message') });
 	});
     
     /* GET settings page. */

@@ -1,0 +1,212 @@
+extends layout
+
+block content
+
+    .app
+      // top header
+      header.header.header-fixed.navbar
+        .brand
+          // toggle offscreen menu
+          a.ti-menu.off-left.visible-xs(href='javascript:;', data-toggle='offscreen', data-move='ltr')
+          // /toggle offscreen menu
+          // logo
+          a.navbar-brand(href='index.html')
+            img(src='img/logo.png', alt='')
+            span.heading-font
+              | Sublime
+          // /logo
+        ul.nav.navbar-nav
+          li.hidden-xs
+            // toggle small menu
+            a.toggle-sidebar(href='javascript:;')
+              i.ti-menu
+            // /toggle small menu
+          li.header-search
+            // toggle search
+            a.toggle-search(href='javascript:;')
+              i.ti-search
+            // /toggle search
+            .search-container
+              form(role='search')
+                input.form-control.search(type='text', placeholder='type and press enter')
+        ul.nav.navbar-nav.navbar-right
+          li.off-right
+            a(href='javascript:;', data-toggle='dropdown')
+              img.header-avatar.img-circle(src='img/faceless.jpg', alt='user', title='user')
+              span.hidden-xs.ml10 Gerald Morris
+              i.ti-angle-down.ti-caret.hidden-xs
+            ul.dropdown-menu
+              li
+                a(href='javascript:;') Settings
+              li
+                a(href='javascript:;') Help
+              li
+                a(href='signin.html') Logout
+      // /top header
+      section.layout
+        // sidebar menu
+        aside.sidebar.offscreen-left
+          // main navigation
+          nav.main-navigation(data-height='auto', data-size='6px', data-distance='0', data-rail-visible='true', data-wheel-step='10')
+            p.nav-title MENU
+            ul.nav
+              // dashboard
+              li
+                a(href='index.html')
+                  i.ti-home
+                  span Dashboard
+              // /dashboard
+              li
+                a(href='index.html')
+                  i.ti-email
+                  span Messages
+              li
+                a(href='index.html')
+                  i.ti-user
+                  span Employees
+              li
+                a(href='index.html')
+                  i.ti-briefcase
+                  span Departments
+              li
+                a(href='index.html')
+                  i.ti-help-alt
+                  span Support
+              li
+                a(href='index.html')
+                  i.ti-settings
+                  span Settings
+        // /sidebar menu
+        // main content
+        section.main-content
+          // content wrapper
+          .content-wrap
+            // inner content wrapper
+            .wrapper
+              ol.breadcrumb
+                li
+                  a(href='javascript:;') Mobile Bulletin
+                li.active Employees
+              section.panel
+                header.panel-heading Create New Employee
+                .panel-body
+                  form.form-horizontal(role='form')
+                    .col-md-2
+                      .form-group
+                        label.col-sm-7.control-label Employee No
+                        .col-sm-5
+                          input.form-control(type='text')
+                    .col-md-2
+                      .form-group
+                        label.col-sm-7.control-label Initials
+                        .col-sm-5
+                          input.form-control(type='text')
+                    .col-md-4
+                      .form-group
+                        label.col-sm-2.control-label Name
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-4
+                      .form-group
+                        label.col-sm-2.control-label Surname
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-4
+                      .form-group
+                        label.col-sm-4.control-label Nationality
+                        .col-sm-8
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                    .col-md-4
+                      .form-group
+                        label.col-sm-2.control-label Email
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-4
+                      .form-group
+                        label.col-sm-2.control-label Cellphone
+                        .col-sm-10
+                          input.form-control(type='text')
+                    .col-md-4
+                      .form-group
+                        label.col-sm-4.control-label Ethnic Group
+                        .col-sm-8
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                    .col-md-4
+                      .form-group
+                        label.col-sm-2.control-label Position
+                        .col-sm-10
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                    .col-md-4
+                      .form-group
+                        label.col-sm-2.control-label Manager
+                        .col-sm-10
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                    .col-md-4
+                      .form-group
+                        label.col-sm-5.control-label Cost Centre Description
+                        .col-sm-7
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                    .col-md-4
+                      .form-group
+                        label.col-sm-7.control-label Employee Group Description
+                        .col-sm-5
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                    .col-md-4
+                      .form-group
+                        label.col-sm-7.control-label Employee Subgroup Description
+                        .col-sm-5
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                    .col-md-12
+                      button.btn.btn-default.pull-right(type='submit') Create Employee
+              section.panel.panel-default
+                header.panel-heading
+                  h5 Employees
+                .panel-body
+                  .table-responsive.no-border
+                    table.table.table-bordered.table-striped.mg-t.datatable
+                      thead
+                        tr
+                          th Name
+                          th Position
+                          th Office
+                          th Age
+                          th Start Date
+            // /inner content wrapper
+          // /content wrapper
+          a.exit-offscreen
+        // /main content
