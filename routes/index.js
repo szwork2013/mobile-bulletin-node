@@ -1,9 +1,91 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+var isAuthenticated = function (req, res, next) {
+	// if user is authenticated in the session, call the next() to call the next request handler 
+	// Passport adds this method to request object. A middleware is allowed to add properties to
+	// request and response objects
+	if (req.isAuthenticated())
+		return next();
+	// if the user is not authenticated then redirect him to the login page
+	res.redirect('/');
+}
 
-module.exports = router;
+module.exports = function(passport){
+    
+    /* GET home page. */
+	router.get('/', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('front/index', { message: req.flash('message') });
+	});
+    
+    /* GET meet our team page. */
+	router.get('/meet-our-team', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('front/team', { message: req.flash('message') });
+	});
+    
+    /* GET messages page. */
+	router.get('/admin/messages', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('admin/messages', { message: req.flash('message') });
+	});
+    
+    /* GET employees page. */
+	router.get('/admin/employees', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('admin/employees', { message: req.flash('message') });
+	});
+    
+    /* GET department page. */
+	router.get('/admin/department', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('admin/department', { message: req.flash('message') });
+	});
+    
+    /* GET settings page. */
+	router.get('/admin/settings', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('admin/settings', { message: req.flash('message') });
+	});
+    
+    
+
+	/* GET login page. */
+	router.get('/login', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('index', { message: req.flash('message') });
+	});
+
+	/* Handle Login POST */
+	router.post('/login', passport.authenticate('login', {
+		successRedirect: '/home',
+		failureRedirect: '/',
+		failureFlash : true  
+	}));
+
+	/* GET Registration Page */
+	router.get('/signup', function(req, res){
+		res.render('register',{message: req.flash('message')});
+	});
+
+	/* Handle Registration POST */
+	router.post('/signup', passport.authenticate('signup', {
+		successRedirect: '/home',
+		failureRedirect: '/signup',
+		failureFlash : true  
+	}));
+
+	/* GET Home Page */
+	router.get('/home', isAuthenticated, function(req, res){
+		res.render('home', { user: req.user });
+	});
+
+	/* Handle Logout */
+	router.get('/signout', function(req, res) {
+		req.logout();
+		res.redirect('/');
+	});
+
+	return router;
+}

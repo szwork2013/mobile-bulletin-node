@@ -1,0 +1,321 @@
+extends layout
+
+block content
+
+    // page loading spinner
+    .pageload
+      .loader
+    // /page loading spinner
+    // menu navigation
+    header.header
+      .container
+        nav.heading-font
+          // branding
+          .branding
+            // toggle menu
+            button.mobile-toggle(type='button')
+              span.ti-menu
+            // /toggle menu
+            a.logo.transition(href='index.html')
+              | Sublime
+          // /branding
+          // links
+          .navigation.spy
+            ul.nav
+              li.hide
+                a(href='#top')
+              li
+                a(href='#how') How it works
+              li
+                a(href='#features') Features
+              li
+                a(href='#reviews') Reviews
+              li
+                a.transition(href='pricing.html') Pricing
+              li.dropdown.show-on-hover
+                a.ignore(href='javascript:;', data-toggle='dropdown')
+                  span Pages
+                ul.dropdown-menu
+                  li
+                    a.transition(href='contact.html') Support (Working Contact Form)
+                  li
+                    a.transition(href='gallery.html') Gallery
+                  li
+                    a.transition(href='team.html') Meet The Team
+                  li
+                    a.transition(href='elements.html') Elements
+                  li
+                    a.transition(href='blog.html') Blog
+                  li
+                    a.transition(href='post.html') Single blog item
+                  li
+                    a.transition(href='feature.html') Feature View
+                  li
+                    a.transition(href='404.html') Frontend 404 page
+              li
+                a(href='javascript:;') Login
+              li
+                a.nav-btn.btn.btn-success.btn-rounded(href='javascript:;') Sign Up
+          // /links
+    // /menu navigation
+    // hero
+    section#top.content-section.hero.vertical-center
+      .hero-parallax.parallax(style='background-image: url(img/cover1.jpg);')
+      .overlay.overlay-colored-9
+      .container
+        .hero-container
+          h1.hero-title(data-animation='fadeInLeft')
+            b Beautiful and fresh Application Dashboard
+          .hero-sub-title(data-animation='fadeInRight')
+            em The most intuitive and flexible web app on the market
+          .call-to-action.heading-font
+            a.btn.btn-white.btn-lg.btn-outline.smooth-scroll(href='#how') Learn More
+            a.btn.btn-white.btn-lg.popup-video(href='http://vimeo.com/61741062')
+              i.fa.fa-play.mr10
+              span Watch the video
+    // /hero
+    // how it works section
+    section#how.content-section
+      .container
+        .col-md-8.col-md-offset-2
+          .section-title
+            h5.heading(data-animation='fadeInDown', data-appear-top-offset='-200')
+              em how it works
+            h4.sub-heading(data-animation='fadeInUp', data-appear-top-offset='-190')
+              | What you need to know about 
+              span.color Sublime App
+        .row.text-center
+          .col-sm-4
+            // feature
+            div(data-animation='fadeInLeft')
+              .feature-icon.bordered
+                i.ti-pencil-alt.color
+              .feature-description
+                h5
+                  span REGISTER
+                  small.show.text-muted REBUM ACCUSAMUS MEA
+                p
+                  | Nam an oblique equidem. An mazim tibique hendrerit est, albucius voluptua ex has. Ei cum eius dicant facilisis, ne diam rebum accusamus mea.
+            // /feature
+          .col-sm-4
+            // feature
+            div(data-animation='fadeInUp')
+              .feature-icon.bordered
+                i.ti-bookmark-alt.color
+              .feature-description
+                h5
+                  span UPLOAD
+                  small.show.text-muted REBUM ACCUSAMUS MEA
+                p
+                  | Nam an oblique equidem. An mazim tibique hendrerit est, albucius voluptua ex has. Ei cum eius dicant facilisis, ne diam rebum accusamus mea.
+            // /feature
+          .col-sm-4
+            // feature
+            div(data-animation='fadeInRight')
+              .feature-icon.bordered
+                i.ti-brush-alt.color
+              .feature-description
+                h5
+                  span REVIEW
+                  small.show.text-muted REBUM ACCUSAMUS MEA
+                p
+                  | Nam an oblique equidem. An mazim tibique hendrerit est, albucius voluptua ex has. Ei cum eius dicant facilisis, ne diam rebum accusamus mea.
+            // /feature
+    // /how it works section
+    // statistics
+    section#statistics.content-section.banner.parallax.color-inherit.text-white.text-center(style='background-image: url(img/cover2.jpg);')
+      .overlay-colored-9
+      .container
+        .row
+          .col-sm-3.col-xs-6.p15
+            i.count-icon.ti-time
+            b.count(data-from='0', data-to='1000', data-appear-top-offset='-200') 0
+            span.heading-font Free API requests
+          .col-sm-3.col-xs-6.p15
+            i.count-icon.ti-face-smile
+            b.count(data-from='0', data-to='2300', data-appear-top-offset='-200') 0
+            span.heading-font Happy Customers
+          .col-sm-3.col-xs-6.p15
+            i.count-icon.ti-info-alt
+            b.count(data-from='0', data-to='6850', data-appear-top-offset='-200') 0
+            span.heading-font Servers Created
+          .col-sm-3.col-xs-6.p15
+            i.count-icon.ti-na
+            b.count(data-from='0', data-to='8650', data-appear-top-offset='-200') 0
+            span.heading-font Tickets Answered
+    // /statistics
+    // features section
+    section#features.content-section.features.feature.light
+      .container
+        .col-md-8.col-md-offset-2
+          .section-title
+            h5.heading(data-animation='fadeInDown', data-appear-top-offset='-200')
+              em admin dashboard features
+            h4.sub-heading(data-animation='fadeInUp', data-appear-top-offset='-190')
+              | All the App 
+              b.color FANCINESS
+        .row
+          .col-sm-6
+            .row
+              .col-md-12.mb15(data-animation='fadeInRight', data-appear-top-offset='-200')
+                .feature-icon.left
+                  i.ti-layers-alt.color
+                .feature-description
+                  h5 RESPONSIVE
+                  p
+                    | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              .col-md-12.mb15(data-animation='fadeInDown', data-delay='200', data-appear-top-offset='-200')
+                .feature-icon.left
+                  i.ti-bag.color
+                .feature-description
+                  h5 MODERN DESIGN
+                  p
+                    | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              .col-md-12.mb15(data-animation='fadeInLeft', data-delay='200', data-appear-top-offset='-200')
+                .feature-icon.left
+                  i.ti-mouse.color
+                .feature-description
+                  h5 DIFFERENT LAYOUTS
+                  p
+                    | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-6.text-center
+            .mt25
+              div
+                img.mt25(src='img/feature-shot.png', data-animation='fadeInUp', alt='')
+    // /features section
+    // ext features section
+    section.content-section
+      .container
+        .row
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-layout.color
+            .feature-description
+              h5 RESPONSIVE
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-world.color
+            .feature-description
+              h5 MODERN DESIGN
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-layout-grid4.color
+            .feature-description
+              h5 DIFFERENT LAYOUTS
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-bookmark-alt.color
+            .feature-description
+              h5 WELL DOCUMENTED
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-truck.color
+            .feature-description
+              h5 FREE LIFETIME UPDATES
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-palette.color
+            .feature-description
+              h5 COLOR OPTIONS
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-settings.color
+            .feature-description
+              h5 EASY TO CUSTOMIZE
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-user.color
+            .feature-description
+              h5 QUICK SUPPORT TEAM
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+          .col-sm-4.p25(data-animation='fadeIn')
+            .feature-icon.left
+              i.ti-brush-alt.color
+            .feature-description
+              h5 GUARANTEED SATISFACTION
+              p
+                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+    // /ext features section
+    // quote banner
+    section.content-section.banner
+      .parallax-cover.parallax-0(style='background-image: url(img/cover3.jpg);')
+      .overlay-darken-4
+      .container
+        .row
+          .col-md-8.col-md-offset-2
+            .text-center
+              blockquote.text-white
+                p
+                  | Outside of the chair, the teapot is the most ubiquitous and important design element in the domestic environment and almost everyone who has tackled the world of design has ended up designing one.
+                small.color David McFadden
+    // /quote banner
+    // reviews
+    section#reviews.content-section.light
+      .container
+        // reviews loaded via ajax
+        .reviews-carousel(data-animation='fadeIn', data-appear-top-offset='-200')
+        // /reviews loaded via ajax
+    // /reviews
+    // subscribe section
+    section.content-section.banner.bg-color.text-white.color-inherit.text-center
+      .container
+        .section-title.mb0
+          h4(data-animation='fadeInUp', data-appear-top-offset='-190') Subscribe to our newsletter
+        small
+          | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+        .row
+          .col-md-4.col-md-offset-4
+            form#subscribeform(method='post', role='form', action='inc/subscribe.php', name='subscribeform')
+              div(style='display:none;visibility:hidden')
+                input#check(type='text', name='check')
+              .input-group.mb15.mt25
+                input#email.form-control.input-lg.no-b(type='email', name='email', placeholder='Your email address', required='')
+                span.input-group-btn
+                  button.btn.btn-success.btn-lg.subscribe(type='submit', data-loading-text='Adding to our list ...')
+                    span Subscribe
+                    i.ti-arrow-circle-right.ml15
+              // subscribe form alert box container
+              .subscribe-message
+                #response.response
+              // /subscribe form alert box container
+    // subscribe section
+    // footer
+    footer.content-section
+      .container
+        .row.text-center
+          .col-sm-12.mb25
+            a.btn.btn-primary.btn-social-icon.btn-rounded.btn-outline.btn-sm.smooth-scroll.mb25(href='#top')
+              i.ti-angle-up
+            br
+            a.btn.btn-social-icon.btn-facebook.btn-rounded.btn-sm.ml5.mr5(href='javascript:;')
+              i.fa.fa-facebook
+            a.btn.btn-social-icon.btn-twitter.btn-rounded.btn-sm.ml5.mr5(href='javascript:;')
+              i.fa.fa-twitter
+            a.btn.btn-social-icon.btn-google-plus.btn-rounded.btn-sm.ml5.mr5(href='javascript:;')
+              i.fa.fa-google-plus
+          .col-sm-12.mb25
+            p
+              | Made with 
+              i.ti-heart.text-danger
+              |  in Paris France
+            small.show
+              | © Copyright Sub
+              span.color Lime
+              |  LLC 
+              span.year
+              | . All rights reserved

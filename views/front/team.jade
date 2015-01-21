@@ -1,0 +1,194 @@
+extends layout
+
+block content
+
+    // page loading spinner
+    .pageload
+      .loader
+    // /page loading spinner
+    // menu navigation
+    header.header.fixed-sticky
+      .container
+        nav.heading-font
+          // branding
+          .branding
+            // toggle menu
+            button.mobile-toggle(type='button')
+              span.ti-menu
+            // /toggle menu
+            a.logo.transition(href='index.html')
+              | Sublime
+          // /branding
+          // links
+          .navigation.spy
+            ul.nav
+              li
+                a.transition(href='index.html#how') How it works
+              li
+                a.transition(href='index.html#features') Features
+              li
+                a.transition(href='index.html#reviews') Reviews
+              li
+                a.transition(href='pricing.html') Pricing
+              li.dropdown.show-on-hover.active
+                a.ignore(href='javascript:;', data-toggle='dropdown')
+                  span Pages
+                ul.dropdown-menu
+                  li.active
+                    a.transition(href='contact.html') Support (Working Contact Form)
+                  li
+                    a.transition(href='gallery.html') Gallery
+                  li
+                    a.transition(href='team.html') Meet The Team
+                  li
+                    a.transition(href='elements.html') Elements
+                  li
+                    a.transition(href='blog.html') Blog
+                  li
+                    a.transition(href='post.html') Single blog item
+                  li
+                    a.transition(href='feature.html') Feature View
+                  li
+                    a.transition(href='404.html') Frontend 404 page
+              li
+                a(href='javascript:;') Login
+              li
+                a.nav-btn.btn.btn-success.btn-rounded(href='javascript:;') Sign Up
+          // /links
+    // /menu navigation
+    // hero
+    section#top.content-section.hero.vertical-center.color-inherit
+      .hero-parallax.parallax(style='background-image: url(img/cover3.jpg);')
+      .overlay.overlay-colored-9
+      .container.no-p
+        .hero-container
+          h4.heading-font Meet Our Team
+          .hero-sub-title
+            p
+              em Creative responsible for building our app
+    // /hero
+    section.content-section
+      .container
+        ul.team
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Janice Ellis
+                small.title Chief Executive Officer
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Bobby Spencer
+                small.title Chief Technical Officer
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Steven Bennett
+                small.title Chief Operations Officer
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Betty Hunt
+                small.title Frontend Developer
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Bruce Spencer
+                small.title Designer
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Alice Jenkins
+                small.title Backend Developer
+          li
+            a(href='7:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Justin Thompson
+                small.title Frontend Developer
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Mary Fernandez
+                small.title Designer
+          li
+            a(href='9:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Sarah Holmes
+                small.title Human Resources Offcer
+          li
+            a(href='10:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Constant Royer
+                small.title Frontend Developer
+          li
+            a(href='javascript:;')
+              .avatar
+                img.img-circle(src='img/faceless.jpg', alt='')
+              .member-meta
+                p.name
+                  b Brandon Simmons
+                small.title Janitor
+    section.content-section.dark.banner
+      .container
+        .row
+          .col-md-8.col-md-offset-2
+            .text-center
+              blockquote.text-white
+                p
+                  | Outside of the chair, the teapot is the most ubiquitous and important design element in the domestic environment and almost everyone who has tackled the world of design has ended up designing one.
+                small.color David McFadden
+    // footer
+    footer.content-section.light.lighten
+      .container
+        .row.text-center
+          .col-sm-12.mb25.color-inherit.text-white
+            a.btn.btn-primary.btn-social-icon.btn-rounded.btn-outline.btn-sm.smooth-scroll.mb25(href='#top')
+              i.ti-angle-up
+            br
+            a.btn.btn-social-icon.btn-facebook.btn-rounded.btn-sm.ml5.mr5(href='javascript:;')
+              i.fa.fa-facebook
+            a.btn.btn-social-icon.btn-twitter.btn-rounded.btn-sm.ml5.mr5(href='javascript:;')
+              i.fa.fa-twitter
+            a.btn.btn-social-icon.btn-google-plus.btn-rounded.btn-sm.ml5.mr5(href='javascript:;')
+              i.fa.fa-google-plus
+          .col-sm-12.mb25
+            p
+              | Made with 
+              i.ti-heart.text-danger
+              |  in Paris France
+            small.show
+              | © Copyright Sub
+              span.color Lime
+              |  LLC 
+              span.year
+              | . All rights reserved
