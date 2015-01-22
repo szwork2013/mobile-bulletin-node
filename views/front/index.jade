@@ -31,43 +31,23 @@ block content
               li
                 a(href='#reviews') Reviews
               li
-                a.transition(href='pricing.html') Pricing
-              li.dropdown.show-on-hover
-                a.ignore(href='javascript:;', data-toggle='dropdown')
-                  span Pages
-                ul.dropdown-menu
-                  li
-                    a.transition(href='contact.html') Support (Working Contact Form)
-                  li
-                    a.transition(href='gallery.html') Gallery
-                  li
-                    a.transition(href='team.html') Meet The Team
-                  li
-                    a.transition(href='elements.html') Elements
-                  li
-                    a.transition(href='blog.html') Blog
-                  li
-                    a.transition(href='post.html') Single blog item
-                  li
-                    a.transition(href='feature.html') Feature View
-                  li
-                    a.transition(href='404.html') Frontend 404 page
+                a(href='/meet-our-team') Team
               li
-                a(href='javascript:;') Login
+                a(href='/admin/login') Login
               li
-                a.nav-btn.btn.btn-success.btn-rounded(href='javascript:;') Sign Up
+                a.nav-btn.btn.btn-success.btn-rounded(href='/admin/register') Register
           // /links
     // /menu navigation
     // hero
     section#top.content-section.hero.vertical-center
-      .hero-parallax.parallax(style='background-image: url(img/cover1.jpg);')
+      .hero-parallax.parallax(style='background-image: url(front/img/cover1.jpg);')
       .overlay.overlay-colored-9
       .container
         .hero-container
           h1.hero-title(data-animation='fadeInLeft')
-            b Beautiful and fresh Application Dashboard
+            b Direct &amp; effective corporate communication
           .hero-sub-title(data-animation='fadeInRight')
-            em The most intuitive and flexible web app on the market
+            em The most direct and effective communication tool on the market
           .call-to-action.heading-font
             a.btn.btn-white.btn-lg.btn-outline.smooth-scroll(href='#how') Learn More
             a.btn.btn-white.btn-lg.popup-video(href='http://vimeo.com/61741062')
@@ -83,7 +63,7 @@ block content
               em how it works
             h4.sub-heading(data-animation='fadeInUp', data-appear-top-offset='-190')
               | What you need to know about 
-              span.color Sublime App
+              span.color Mobile Bulletin
         .row.text-center
           .col-sm-4
             // feature
@@ -92,10 +72,10 @@ block content
                 i.ti-pencil-alt.color
               .feature-description
                 h5
-                  span REGISTER
-                  small.show.text-muted REBUM ACCUSAMUS MEA
+                  span ACCESSIBLE
+                  small.show.text-muted ENGAGE FROM ANYWHERE
                 p
-                  | Nam an oblique equidem. An mazim tibique hendrerit est, albucius voluptua ex has. Ei cum eius dicant facilisis, ne diam rebum accusamus mea.
+                  | With MobileBulletin all comunications initiated on the platform are gauranteed to reach the recipient whether they prefer SMS, Email or USSD
             // /feature
           .col-sm-4
             // feature
@@ -104,10 +84,10 @@ block content
                 i.ti-bookmark-alt.color
               .feature-description
                 h5
-                  span UPLOAD
-                  small.show.text-muted REBUM ACCUSAMUS MEA
+                  span DIRECT
+                  small.show.text-muted GET YOUR MESSAGE THROUGH
                 p
-                  | Nam an oblique equidem. An mazim tibique hendrerit est, albucius voluptua ex has. Ei cum eius dicant facilisis, ne diam rebum accusamus mea.
+                  | With mobile bulletin you can make sure that your communications get through to the intended recepient whether it be whole organisations, departments or individuals
             // /feature
           .col-sm-4
             // feature
@@ -116,33 +96,33 @@ block content
                 i.ti-brush-alt.color
               .feature-description
                 h5
-                  span REVIEW
-                  small.show.text-muted REBUM ACCUSAMUS MEA
+                  span ANALYTICS
+                  small.show.text-muted MEASURE YOUR COMMUNICATION EFFECTIVENESS
                 p
-                  | Nam an oblique equidem. An mazim tibique hendrerit est, albucius voluptua ex has. Ei cum eius dicant facilisis, ne diam rebum accusamus mea.
+                  | With our effective analytics platform you are able to measure and gauge the effectiveness of your communications and its delivery and engagement
             // /feature
     // /how it works section
     // statistics
-    section#statistics.content-section.banner.parallax.color-inherit.text-white.text-center(style='background-image: url(img/cover2.jpg);')
+    section#statistics.content-section.banner.parallax.color-inherit.text-white.text-center(style='background-image: url(front/img/cover2.jpg);')
       .overlay-colored-9
       .container
         .row
           .col-sm-3.col-xs-6.p15
             i.count-icon.ti-time
             b.count(data-from='0', data-to='1000', data-appear-top-offset='-200') 0
-            span.heading-font Free API requests
+            span.heading-font Communications
           .col-sm-3.col-xs-6.p15
             i.count-icon.ti-face-smile
             b.count(data-from='0', data-to='2300', data-appear-top-offset='-200') 0
-            span.heading-font Happy Customers
+            span.heading-font Delivered
           .col-sm-3.col-xs-6.p15
             i.count-icon.ti-info-alt
             b.count(data-from='0', data-to='6850', data-appear-top-offset='-200') 0
-            span.heading-font Servers Created
+            span.heading-font Opened
           .col-sm-3.col-xs-6.p15
             i.count-icon.ti-na
             b.count(data-from='0', data-to='8650', data-appear-top-offset='-200') 0
-            span.heading-font Tickets Answered
+            span.heading-font Employees
     // /statistics
     // features section
     section#features.content-section.features.feature.light
@@ -161,27 +141,25 @@ block content
                 .feature-icon.left
                   i.ti-layers-alt.color
                 .feature-description
-                  h5 RESPONSIVE
-                  p
-                    | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+                  h5 CAMPAIGN MANAGEMENT
+                  p Create powerful SMS, USSD and Email campaigns through our campaign creator.
               .col-md-12.mb15(data-animation='fadeInDown', data-delay='200', data-appear-top-offset='-200')
                 .feature-icon.left
                   i.ti-bag.color
                 .feature-description
-                  h5 MODERN DESIGN
-                  p
-                    | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+                  h5 ORGANISATION MANAGEMENT
+                  p Organise and structure your organisation via Department, Branches, Wards, etc.
               .col-md-12.mb15(data-animation='fadeInLeft', data-delay='200', data-appear-top-offset='-200')
                 .feature-icon.left
                   i.ti-mouse.color
                 .feature-description
-                  h5 DIFFERENT LAYOUTS
+                  h5 REPORTS
                   p
-                    | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+                    | View how all of your campaigns have faired and how employees are interacting with your communications.
           .col-sm-6.text-center
             .mt25
               div
-                img.mt25(src='img/feature-shot.png', data-animation='fadeInUp', alt='')
+                img.mt25(th:src='front/img/feature-shot.png', data-animation='fadeInUp', alt='')
     // /features section
     // ext features section
     section.content-section
@@ -191,69 +169,61 @@ block content
             .feature-icon.left
               i.ti-layout.color
             .feature-description
-              h5 RESPONSIVE
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              h5 USSD
+              p Reach over 99.99% of all mobile deveices through USSD communication.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-world.color
             .feature-description
-              h5 MODERN DESIGN
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              h5 EMAIL
+              p Optimise, deliver and engage all your communications for SMS.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-layout-grid4.color
             .feature-description
-              h5 DIFFERENT LAYOUTS
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              h5 SMS
+              p Optimise, deliver and engage all your communications for SMS.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-bookmark-alt.color
             .feature-description
-              h5 WELL DOCUMENTED
+              h5 MONITOR
               p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+                | Monitor how your employees are engaging with the communications that you send out.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-truck.color
             .feature-description
-              h5 FREE LIFETIME UPDATES
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              h5 OPTIMISE
+              p Improve the way your organisation engages with it's employees.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-palette.color
             .feature-description
-              h5 COLOR OPTIONS
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              h5 REPORT
+              p Create reports and gain insights on your organisation communications.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-settings.color
             .feature-description
-              h5 EASY TO CUSTOMIZE
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              h5 EASY TO USE
+              p Intuitive, clean and slick easy to use interface.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-user.color
             .feature-description
-              h5 QUICK SUPPORT TEAM
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+              h5 LOCALISED
+              p Use the platform in any South African language of your choice.
           .col-sm-4.p25(data-animation='fadeIn')
             .feature-icon.left
               i.ti-brush-alt.color
             .feature-description
-              h5 GUARANTEED SATISFACTION
-              p
-                | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
-    // /ext features section
+              h5 AWESOME SUPPORT
+              p Our team of support personal is available around the clock to help you.
+    // ext features section
     // quote banner
     section.content-section.banner
-      .parallax-cover.parallax-0(style='background-image: url(img/cover3.jpg);')
+      .parallax-cover.parallax-0(style='background-image: url(front/img/cover3.jpg);')
       .overlay-darken-4
       .container
         .row
@@ -261,8 +231,8 @@ block content
             .text-center
               blockquote.text-white
                 p
-                  | Outside of the chair, the teapot is the most ubiquitous and important design element in the domestic environment and almost everyone who has tackled the world of design has ended up designing one.
-                small.color David McFadden
+                  | The single biggest problem in communication is the illusion that it has taken place.
+                small.color George Bernard Shaw
     // /quote banner
     // reviews
     section#reviews.content-section.light
@@ -276,15 +246,14 @@ block content
       .container
         .section-title.mb0
           h4(data-animation='fadeInUp', data-appear-top-offset='-190') Subscribe to our newsletter
-        small
-          | Lorem ipsum dolor sit amet, modus impedit pertinax vix ne, quem intellegat duo ex.
+        small Keep up to date with the latest MobileBulletin news, updates and events.
         .row
           .col-md-4.col-md-offset-4
             form#subscribeform(method='post', role='form', action='inc/subscribe.php', name='subscribeform')
               div(style='display:none;visibility:hidden')
                 input#check(type='text', name='check')
               .input-group.mb15.mt25
-                input#email.form-control.input-lg.no-b(type='email', name='email', placeholder='Your email address', required='')
+                input#email.form-control.input-lg.no-b(type='email', name='email', placeholder='Your email address', required='required')
                 span.input-group-btn
                   button.btn.btn-success.btn-lg.subscribe(type='submit', data-loading-text='Adding to our list ...')
                     span Subscribe
@@ -312,10 +281,10 @@ block content
             p
               | Made with 
               i.ti-heart.text-danger
-              |  in Paris France
+              |  in South Africa
             small.show
-              | © Copyright Sub
-              span.color Lime
-              |  LLC 
+              | © Copyright Mobile
+              span.color Bulletin
+              |   
               span.year
               | . All rights reserved

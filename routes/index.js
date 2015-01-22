@@ -64,39 +64,47 @@ module.exports = function(passport){
     
 
 	/* GET login page. */
-	router.get('/login', function(req, res) {
+	router.get('/admin/login', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('index', { message: req.flash('message') });
+		res.render('admin/login', { message: req.flash('message') });
 	});
 
 	/* Handle Login POST */
-	router.post('/login', passport.authenticate('login', {
-		successRedirect: '/home',
+	router.post('/admin/login', passport.authenticate('login', {
+		successRedirect: '/admin/dashboard',
 		failureRedirect: '/',
 		failureFlash : true  
 	}));
 
 	/* GET Registration Page */
-	router.get('/signup', function(req, res){
-		res.render('register',{message: req.flash('message')});
+	router.get('/admin/register', function(req, res){
+		res.render('admin/register',{message: req.flash('message')});
 	});
 
 	/* Handle Registration POST */
-	router.post('/signup', passport.authenticate('signup', {
-		successRedirect: '/home',
-		failureRedirect: '/signup',
+	router.post('/admin/register', passport.authenticate('signup', {
+		successRedirect: '/admin/dashboard',
+		failureRedirect: '/admin/register',
 		failureFlash : true  
 	}));
-
-	/* GET Home Page */
-	router.get('/home', isAuthenticated, function(req, res){
-		res.render('home', { user: req.user });
+    
+    /* GET settings page. */
+	router.get('/admin/forgot-password', function(req, res) {
+    	// Display the Login page with any flash message, if any
+		res.render('admin/forgot-password', { message: req.flash('message') });
 	});
 
 	/* Handle Logout */
-	router.get('/signout', function(req, res) {
+	router.get('/admin/signout', function(req, res) {
 		req.logout();
 		res.redirect('/');
+	});
+
+    ///////////////////////////////////////////
+    
+	/* GET Home Page */
+	router.get('/home', isAuthenticated, function(req, res){
+		res.render('home', { user: req.user });
 	});
 
 	return router;

@@ -22,38 +22,20 @@ block content
           // links
           .navigation.spy
             ul.nav
+              li.hide
+                a(href='#top')
               li
-                a.transition(href='index.html#how') How it works
+                a(href='#how') How it works
               li
-                a.transition(href='index.html#features') Features
+                a(href='#features') Features
               li
-                a.transition(href='index.html#reviews') Reviews
+                a(href='#reviews') Reviews
               li
-                a.transition(href='pricing.html') Pricing
-              li.dropdown.show-on-hover.active
-                a.ignore(href='javascript:;', data-toggle='dropdown')
-                  span Pages
-                ul.dropdown-menu
-                  li.active
-                    a.transition(href='contact.html') Support (Working Contact Form)
-                  li
-                    a.transition(href='gallery.html') Gallery
-                  li
-                    a.transition(href='team.html') Meet The Team
-                  li
-                    a.transition(href='elements.html') Elements
-                  li
-                    a.transition(href='blog.html') Blog
-                  li
-                    a.transition(href='post.html') Single blog item
-                  li
-                    a.transition(href='feature.html') Feature View
-                  li
-                    a.transition(href='404.html') Frontend 404 page
+                a(href='/meet-our-team') Team
               li
-                a(href='javascript:;') Login
+                a(href='/admin/login') Login
               li
-                a.nav-btn.btn.btn-success.btn-rounded(href='javascript:;') Sign Up
+                a.nav-btn.btn.btn-success.btn-rounded(href='/admin/register') Register
           // /links
     // /menu navigation
     // hero
@@ -185,10 +167,10 @@ block content
             p
               | Made with 
               i.ti-heart.text-danger
-              |  in Paris France
+              |  in South Africa
             small.show
-              | © Copyright Sub
-              span.color Lime
-              |  LLC 
+              | © Copyright Mobile
+              span.color Bulletin
+              |   
               span.year
               | . All rights reserved

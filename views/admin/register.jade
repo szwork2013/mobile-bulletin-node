@@ -1,0 +1,60 @@
+doctype html
+html.signup.no-js(lang='')
+  head
+    // meta
+    meta(charset='utf-8')
+    meta(name='description', content='Direct and Effective Corporate Communication')
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1')
+    // /meta
+    title MobileBulletin - Direct &amp; effective corporate communication
+    // page level plugin styles
+    // /page level plugin styles
+    // core styles
+    link(rel='stylesheet', href='bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/font-awesome.css')
+    link(rel='stylesheet', href='css/themify-icons.css')
+    link(rel='stylesheet', href='css/animate.min.css')
+    // /core styles
+    // template styles
+    link(rel='stylesheet', href='css/skins/palette.css')
+    link(rel='stylesheet', href='css/fonts/font.css')
+    link(rel='stylesheet', href='css/main.css')
+    // template styles
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    // load modernizer
+    script(src='plugins/modernizr.js')
+  body.bg-info
+    .center-wrapper
+      .center-content
+        .row
+          .col-xs-10.col-xs-offset-1.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4
+            section.panel.bg-white.no-b
+              ul.switcher-dash-action
+                li
+                  a.selected(href='/admin/login') Sign in
+                li.active
+                  a(href='#') New account
+              .p15
+                form(role='form', action='/admin/login')
+                  input.form-control.input-lg.mb25(type='text', placeholder='Choose a username', autofocus='')
+                  input.form-control.input-lg.mb25(type='text', placeholder='Email address')
+                  input.form-control.input-lg.mb25(type='password', placeholder='Password')
+                  input.form-control.input-lg.mb25(type='password', placeholder='Confirm password')
+                  .show
+                    label.checkbox
+                      input(type='checkbox', value='remember-me')
+                      | I accept
+                      a(href='javascript:;') Mobile Bulletins's
+                      | terms and conditions
+                  button.btn.btn-primary.btn-lg.btn-block(type='submit') Sign up
+            p.text-center
+              | Copyright ©
+              span#year.mr5
+              span Mobile Bulletin
+    script(type='text/javascript').
+      var el = document.getElementById("year"),
+      year = (new Date().getFullYear());
+      el.innerHTML = year;

@@ -43,7 +43,7 @@ var demoHome = function () {
                 itemsDesktopSmall: [768, 1],
                 itemsTablet: false,
                 itemsMobile: false,
-                jsonPath: "json/reviews.json",
+                jsonPath: "front/json/reviews.json",
                 jsonSuccess: renderReviews
             });
         }
