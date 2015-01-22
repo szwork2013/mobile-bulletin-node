@@ -1,0 +1,63 @@
+doctype html
+html.error-page.no-js(lang='')
+  head
+    // meta
+    meta(charset='utf-8')
+    meta(name='description', content='Direct and Effective Corporate Communication')
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1')
+    // /meta
+    title MobileBulletin - Direct &amp; effective corporate communication
+    // page level plugin styles
+    // /page level plugin styles
+    // core styles
+    link(rel='stylesheet', href='bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/font-awesome.css')
+    link(rel='stylesheet', href='css/themify-icons.css')
+    link(rel='stylesheet', href='css/animate.min.css')
+    // /core styles
+    // template styles
+    link(rel='stylesheet', href='css/skins/palette.css')
+    link(rel='stylesheet', href='css/fonts/font.css')
+    link(rel='stylesheet', href='css/main.css')
+    // template styles
+    // HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    // load modernizer
+    script(src='plugins/modernizr.js')
+  // body
+  body.bg-danger
+    // error wrapper
+    .center-wrapper
+      .center-content.text-center
+        .error-number.animated.flash
+          i.ti-alert.mr15.show
+          span 500
+        .mb25 SERVER ERROR
+        p
+          | We're experiencing an internal server problem.
+          br
+          br
+          | Please try again later or contact 
+          a(href='mailto:mail@contact.tld') mail@contact.tld
+        #message
+            pre #{message}
+        ul.mt25.error-nav
+          li
+            a(href='javascript:;')
+              | ©
+              span#year.mr5
+              | Sublime LLC
+          li
+            a(href='javascript:;') About
+          li
+            a(href='javascript:;') Help
+          li
+            a(href='javascript:;') Status
+    // /error wrapper
+    script(type='text/javascript').
+      var el = document.getElementById("year"),
+      year = (new Date().getFullYear());
+      el.innerHTML = year;
+  // /body

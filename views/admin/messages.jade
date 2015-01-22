@@ -32,16 +32,17 @@ block content
         ul.nav.navbar-nav.navbar-right
           li.off-right
             a(href='javascript:;', data-toggle='dropdown')
-              img.header-avatar.img-circle(src='img/faceless.jpg', alt='user', title='user')
-              span.hidden-xs.ml10 Gerald Morris
-              i.ti-angle-down.ti-caret.hidden-xs
+                #user
+                    img.header-avatar.img-circle(src='img/faceless.jpg', alt='user', title='user')
+                    span.hidden-xs.ml10 #{user.company} 
+                    i.ti-angle-down.ti-caret.hidden-xs
             ul.dropdown-menu
               li
-                a(href='javascript:;') Settings
+                a(href='/admin/settings') Settings
               li
-                a(href='javascript:;') Help
+                a(href='/admin/support') Help
               li
-                a(href='signin.html') Logout
+                a(href='/admin/signout') Logout
       // /top header
       section.layout
         // sidebar menu

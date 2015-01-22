@@ -8,7 +8,7 @@ var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	// if the user is not authenticated then redirect him to the login page
-	res.redirect('/');
+	res.redirect('/admin/login');
 }
 
 module.exports = function(passport){
@@ -49,10 +49,10 @@ module.exports = function(passport){
 		res.render('admin/support', { message: req.flash('message') });
 	});
     
-    /* GET support page. */
-	router.get('/admin/dashboard', function(req, res) {
+    /* GET dashboard page. */
+	router.get('/admin/dashboard', isAuthenticated, function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/dashboard', { message: req.flash('message') });
+		res.render('admin/dashboard', { user: req.user });
 	});
     
     /* GET settings page. */
@@ -75,7 +75,7 @@ module.exports = function(passport){
 	}));
 
 	/* GET Registration Page */
-	router.get('/admin/register', isAuthenticated, function(req, res){
+	router.get('/admin/register', function(req, res){
 		res.render('admin/register',{message: req.flash('message')});
 	});
 
