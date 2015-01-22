@@ -53,28 +53,28 @@ block content
             ul.nav
               // dashboard
               li
-                a(href='index.html')
+                a(href='/admin/dashboard')
                   i.ti-home
                   span Dashboard
               // /dashboard
               li
-                a(href='index.html')
+                a(href='/admin/messages')
                   i.ti-email
                   span Messages
               li
-                a(href='index.html')
+                a(href='/admin/employees')
                   i.ti-user
                   span Employees
               li
-                a(href='index.html')
+                a(href='/admin/departments')
                   i.ti-briefcase
                   span Departments
               li
-                a(href='index.html')
+                a(href='/admin/support')
                   i.ti-help-alt
                   span Support
               li
-                a(href='index.html')
+                a(href='/admin/settings')
                   i.ti-settings
                   span Settings
         // /sidebar menu
@@ -102,11 +102,12 @@ block content
                         label.col-sm-2.control-label Module
                         .col-sm-10
                           select.form-control
-                            option 1
-                            option 2
-                            option 3
-                            option 4
-                            option 5
+                            option Dashboard
+                            option Messages
+                            option Employees
+                            option Departments
+                            option Support
+                            option Settings
                     .col-md-12
                       .form-group
                         label.col-sm-2.control-label Description

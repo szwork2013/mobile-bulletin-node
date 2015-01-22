@@ -40,11 +40,11 @@ html.signin.no-js(lang='')
                 li
                   a(href='/admin/register') New account
               .p15
-                form(role='form', action='/admin/login')
+                form(role='form', action='/admin/login', method="POST")
                     #message
                     if message
                         .atttention #{message}
-                    input.form-control.input-lg.mb25(type='text', name='username', placeholder='Email', data-parsley-type='email', data-parsley-required='true', data-parsley-trigger='change', autofocus='')
+                    input.form-control.input-lg.mb25(type='text', name='username', placeholder='Username', data-parsley-type='email', data-parsley-required='true', data-parsley-trigger='change', autofocus='')
                     input.form-control.input-lg.mb25(type='password', name='password', data-rangelength='[11,20]', placeholder='Password')
                     .show
                         .pull-right

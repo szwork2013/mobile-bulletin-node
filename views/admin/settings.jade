@@ -53,28 +53,28 @@ block content
             ul.nav
               // dashboard
               li
-                a(href='index.html')
+                a(href='/admin/dashboard')
                   i.ti-home
                   span Dashboard
               // /dashboard
               li
-                a(href='index.html')
+                a(href='/admin/messages')
                   i.ti-email
                   span Messages
               li
-                a(href='index.html')
+                a(href='/admin/employees')
                   i.ti-user
                   span Employees
               li
-                a(href='index.html')
+                a(href='/admin/departments')
                   i.ti-briefcase
                   span Departments
               li
-                a(href='index.html')
+                a(href='/admin/support')
                   i.ti-help-alt
                   span Support
               li
-                a(href='index.html')
+                a(href='/admin/settings')
                   i.ti-settings
                   span Settings
         // /sidebar menu
@@ -92,28 +92,29 @@ block content
                 header.panel-heading Settings
                 .panel-body
                   form.form-horizontal(role='form')
-                    .col-md-12
-                      .form-group
-                        label.col-sm-2.control-label Company Name
-                        .col-sm-10
-                          input.form-control(type='text')
-                    .col-md-12
-                      .form-group
-                        label.col-sm-2.control-label Website
-                        .col-sm-10
-                          input.form-control(type='text')
-                    .col-md-12
-                      .form-group
-                        label.col-sm-2.control-label Email
-                        .col-sm-10
-                          input.form-control(type='text')
-                    .col-md-12
-                      .form-group
-                        label.col-sm-2.control-label Telephone
-                        .col-sm-10
-                          input.form-control(type='text')
-                    .col-md-12
-                      button.btn.btn-default.pull-right(type='submit') Save
+                    #user
+                        .col-md-12
+                          .form-group
+                            label.col-sm-2.control-label Company Name
+                            .col-sm-10
+                              input.form-control(type='text', value='#{user.company}')
+                        .col-md-12
+                          .form-group
+                            label.col-sm-2.control-label Website
+                            .col-sm-10
+                              input.form-control(type='text', value='#{user.website}')
+                        .col-md-12
+                          .form-group
+                            label.col-sm-2.control-label Email
+                            .col-sm-10
+                              input.form-control(type='text', value='#{user.email}')
+                        .col-md-12
+                          .form-group
+                            label.col-sm-2.control-label Telephone
+                            .col-sm-10
+                              input.form-control(type='text', value='#{user.telephone}')
+                        .col-md-12
+                          button.btn.btn-default.pull-right(type='submit') Save
             // /inner content wrapper
           // /content wrapper
           a.exit-offscreen

@@ -28,25 +28,25 @@ module.exports = function(passport){
     /* GET messages page. */
 	router.get('/admin/messages', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/messages', { message: req.flash('message') });
+		res.render('admin/messages', { user: req.user });
 	});
     
     /* GET employees page. */
 	router.get('/admin/employees', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/employees', { message: req.flash('message') });
+		res.render('admin/employees', { user: req.user });
 	});
     
     /* GET department page. */
 	router.get('/admin/departments', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/departments', { message: req.flash('message') });
+		res.render('admin/departments', { user: req.user });
 	});
     
     /* GET support page. */
 	router.get('/admin/support', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/support', { message: req.flash('message') });
+		res.render('admin/support', { user: req.user });
 	});
     
     /* GET dashboard page. */
@@ -58,7 +58,7 @@ module.exports = function(passport){
     /* GET settings page. */
 	router.get('/admin/settings', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/settings', { message: req.flash('message') });
+		res.render('admin/settings', { user: req.user });
 	});
 
 	/* GET login page. */
@@ -96,13 +96,6 @@ module.exports = function(passport){
 	router.get('/admin/signout', function(req, res) {
 		req.logout();
 		res.redirect('/');
-	});
-
-    ///////////////////////////////////////////
-    
-	/* GET Home Page */
-	router.get('/home', isAuthenticated, function(req, res){
-		res.render('home', { user: req.user });
 	});
 
 	return router;
