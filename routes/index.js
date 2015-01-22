@@ -60,8 +60,6 @@ module.exports = function(passport){
     	// Display the Login page with any flash message, if any
 		res.render('admin/settings', { message: req.flash('message') });
 	});
-    
-    
 
 	/* GET login page. */
 	router.get('/admin/login', function(req, res) {
@@ -72,17 +70,17 @@ module.exports = function(passport){
 	/* Handle Login POST */
 	router.post('/admin/login', passport.authenticate('login', {
 		successRedirect: '/admin/dashboard',
-		failureRedirect: '/',
+		failureRedirect: '/admin/login',
 		failureFlash : true  
 	}));
 
 	/* GET Registration Page */
-	router.get('/admin/register', function(req, res){
+	router.get('/admin/register', isAuthenticated, function(req, res){
 		res.render('admin/register',{message: req.flash('message')});
 	});
 
 	/* Handle Registration POST */
-	router.post('/admin/register', passport.authenticate('signup', {
+	router.post('/admin/register', passport.authenticate('register', {
 		successRedirect: '/admin/dashboard',
 		failureRedirect: '/admin/register',
 		failureFlash : true  

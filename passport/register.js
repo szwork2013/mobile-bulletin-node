@@ -4,7 +4,7 @@ var bCrypt = require('bcrypt-nodejs');
 
 module.exports = function(passport){
 
-	passport.use('signup', new LocalStrategy({
+	passport.use('register', new LocalStrategy({
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) {
@@ -14,13 +14,13 @@ module.exports = function(passport){
                 User.findOne({ 'username' :  username }, function(err, user) {
                     // In case of any error, return using the done method
                     if (err){
-                        console.log('Error in SignUp: '+err);
+                        console.log('Error in Registration: '+err);
                         return done(err);
                     }
                     // already exists
                     if (user) {
                         console.log('User already exists with username: '+username);
-                        return done(null, false, req.flash('message','User Already Exists'));
+                        return done(null, false, req.flash('message','<div class="alert alert-warning alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Warning!</strong>&nbsp;User Already Exists</div>'));
                     } else {
                         // if there is no user with that email
                         // create the user
@@ -29,9 +29,10 @@ module.exports = function(passport){
                         // set the user's local credentials
                         newUser.username = username;
                         newUser.password = createHash(password);
+                        newUser.company = req.param('company');
                         newUser.email = req.param('email');
-                        newUser.firstName = req.param('firstName');
-                        newUser.lastName = req.param('lastName');
+                        newUser.telephone = req.param('telephone');
+                        newUser.website = req.param('website');
 
                         // save the user
                         newUser.save(function(err) {
