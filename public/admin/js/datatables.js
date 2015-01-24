@@ -1,24 +1,8 @@
-var demoDataTables = function () {
-    return {
-        init: function () {
-            $('.datatable').dataTable({
-                "sAjaxSource": "data/datatables-arrays.txt",
-                "sAjaxDataProp": "data",
-                "sPaginationType": "bootstrap"
-            });
-
-            $('.chosen').chosen({
-                width: "80px"
-            });
-        }
-    };
-}();
-
 var employeesDataTables = function () {
     return {
         init: function () {
             $('.employees-datatable').dataTable({
-                "sAjaxSource": "employees.json",
+                "sAjaxSource": "employees-table.json",
                 "sAjaxDataProp": "data",
                 "sPaginationType": "bootstrap"
             });
@@ -32,6 +16,5 @@ var employeesDataTables = function () {
 
 $(function () {
     "use strict";
-    //demoDataTables.init();
     employeesDataTables.init();
 });

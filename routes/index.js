@@ -54,12 +54,11 @@ module.exports = function(passport){
     /* GET employees page. */
 	router.get('/admin/employees', function(req, res) {
     	// Display the Login page with any flash message, if any
-        var employees = GetAllEmployees();
-		res.render('admin/employees', { user: req.user, employees : employees });
+        res.render('admin/employees', { user: req.user });
 	});
     
     /* GET employees list. */
-	router.get('/admin/employees.json', function(req, res) {
+	router.get('/admin/employees-table.json', function(req, res) {
         Employee
             .find()
             .where({ '_created_by': req.user._id })
@@ -87,7 +86,7 @@ module.exports = function(passport){
                     if(employees[i].manager == null){
                         objArray.push("");
                     }else{
-                        objArray.push(employees[i].manager.firstname);
+                        objArray.push(employees[i].manager.firstname + " " + employees[i].manager.lastname);
                     }
                     
                     objArray.push(employees[i].cost_centre);
@@ -106,6 +105,21 @@ module.exports = function(passport){
             });
 	});
     
+    /* GET employees list. */
+	router.get('/admin/employees-raw.json', function(req, res) {
+        Employee
+            .find()
+            .where({ '_created_by': req.user._id })
+            .populate('manager')
+            .populate('_created_by')
+            .exec(function(err, employees){
+                if(err){
+                    console.log(err);
+                }
+                res.json({ "data" : employees });
+            });
+	});
+    
     /* Handle Login POST */
 	router.post('/admin/employees', function(req, res) {
         
@@ -117,6 +131,7 @@ module.exports = function(passport){
                 lastname: req.body.lastname,
                 email: req.body.email,
                 cellphone: req.body.cellphone,
+                manager: req.body.manager,
                 _created_by: req.user._id
             }, function(err, employees){
                 if(err){
