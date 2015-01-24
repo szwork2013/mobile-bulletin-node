@@ -718,11 +718,9 @@ module.exports = function(passport){
     ================================================================================*/
     
     /* GET employees list. */
-	router.get('/api/ussd/disclaimer', function(req, res) {
-        
+	router.get('/api/ussd/registration_status', function(req, res) {
         res.type('text/plain');
         res.send(
-            'format: ' + req.param('format') +
             'ussd_msisdn: ' + req.param('ussd_msisdn') +
             'ussd_session_id: ' + req.param('ussd_session_id') +
             'ussd_request: ' + req.param('ussd_request') +
@@ -731,7 +729,6 @@ module.exports = function(passport){
             'ussd_node_name: ' + req.param('ussd_node_name') +
             'ussd_response_Disclaimer: ' + req.param('ussd_response_Disclaimer')
         );
-        
 	});
 
 	return router;
