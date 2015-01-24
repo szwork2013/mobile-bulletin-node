@@ -9,7 +9,7 @@ module.exports = mongoose.model('Employee', {
     email: String,
     cellphone: String,
     ethnicity: { type: mongoose.Schema.Types.ObjectId, ref: 'TypeHierarchy' },
-    position: { type: mongoose.Schema.Types.ObjectId, ref: 'TypeHierarchy' },
+    position: String,
     manager: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
     cost_centre: { type: mongoose.Schema.Types.ObjectId, ref: 'TypeHierarchy' },
     employee_group_description: { type: mongoose.Schema.Types.ObjectId, ref: 'TypeHierarchy' },

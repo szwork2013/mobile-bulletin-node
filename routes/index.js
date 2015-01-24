@@ -71,18 +71,186 @@ module.exports = function(passport){
                             { name: 'COUNTRY_SOUTH_AFRICA', description: 'South Africa', parent: result._id, ordinal: '0'},
                             { name: 'COUNTRY_ZIMBABWE', description: 'Zimbabwe', parent: result._id, ordinal: '1'}
                         ],
-                        function(err, country_child){
+                        function(err, children){
                             if(err){
                                 this.err = err;
                                 console.log(err);
                             }else{
-                                console.log(country_child);
+                                console.log(children);
                             }
                         }
                     ); 
                     
                 }
-            }); 
+            });
+            
+            //CREATE COUNTRY Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'GENDER',
+                description: 'Gender'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'GENDER_MALE', description: 'Male', parent: result._id, ordinal: '0'},
+                            { name: 'GENDER_FEMALE', description: 'Female', parent: result._id, ordinal: '1'},
+                            { name: 'GENDER_OTHER', description: 'Other', parent: result._id, ordinal: '2'}
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
+            
+            //CREATE ETHNICITY Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'ETHNICITY',
+                description: 'Ethnicity'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'ETHNICITY_AFRICAN', description: 'African', parent: result._id, ordinal: '0'},
+                            { name: 'ETHNICITY_COLOURED', description: 'Couloured', parent: result._id, ordinal: '1'},
+                            { name: 'ETHNICITY_INDIAN', description: 'Indian', parent: result._id, ordinal: '2'},
+                            { name: 'ETHNICITY_WHITE', description: 'White', parent: result._id, ordinal: '3'},
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
+            
+            //CREATE ETHNICITY Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'POSITION_DESCRIPTION',
+                description: 'Position Description'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'POSITION_DESCRIPTION_ADMIN_CONTROLLER', description: 'Admin Controller', parent: result._id, ordinal: '0'},
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
+            
+            //CREATE EMPLOYEE GROUP DESCRIPTION Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'EMPLOYEE_GROUP_DESCRIPTION',
+                description: 'Employee Group Description'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'EMPLOYEE_GROUP_DESCRIPTION_EXECUTIVES', description: 'Executives', parent: result._id, ordinal: '0'},
+                            { name: 'EMPLOYEE_GROUP_DESCRIPTION_MONTHLY', description: 'Monthly', parent: result._id, ordinal: '1'},
+                            { name: 'EMPLOYEE_GROUP_DESCRIPTION_WEEKLY_WAGES', description: 'Weekly Wages', parent: result._id, ordinal: '2'},
+                            { name: 'EMPLOYEE_GROUP_DESCRIPTION_OTHER', description: 'Other', parent: result._id, ordinal: '3'},
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
+            
+            //CREATE EMPLOYEE SUB GROUP Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION',
+                description: 'Employee Sub Group Description'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION_FIXED_TERM_EMPLOYEE', description: 'Fixed Term Employee', parent: result._id, ordinal: '0'},
+                            { name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION_PERMANENT', description: 'Permanent', parent: result._id, ordinal: '1'},
+                            { name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION_POST_RETIREE_FIXED_TERM', description: 'Post Retiree Fixed Term', parent: result._id, ordinal: '2'},
+                            { name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION_SALARY', description: 'Salary', parent: result._id, ordinal: '3'},
+                            { name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION_SUP_FOREMAN_SHIFT', description: 'Sup/Foreman (Shift)', parent: result._id, ordinal: '4'},
+                            { name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION_OTHER', description: 'Other', parent: result._id, ordinal: '5'}
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
         }
         
         var result = RefreshTypeHierarchy();
@@ -97,6 +265,111 @@ module.exports = function(passport){
                 TypeHierarchy
                     .findOne()
                     .where({ name: 'COUNTRY' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
+            case 'GENDER':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'GENDER' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
+            case 'ETHNICITY':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'ETHNICITY' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
+            case 'EMPLOYEE_GROUP_DESCRIPTION':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'EMPLOYEE_GROUP_DESCRIPTION' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
+            case 'EMPLOYEE_SUB_GROUP_DESCRIPTION':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'EMPLOYEE_SUB_GROUP_DESCRIPTION' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
+            case 'POSITION_DESCRIPTION':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'POSITION_DESCRIPTION' })
                     .exec(function(err, result){
                         if(err){
                             console.log(err);
