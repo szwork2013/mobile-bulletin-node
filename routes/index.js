@@ -718,7 +718,7 @@ module.exports = function(passport){
     ================================================================================*/
     
     /* GET employees list. */
-	router.post('/api/ussd/disclaimer', function(req, res) {
+	router.get('/api/ussd/disclaimer', function(req, res) {
         
         res.type('text/plain');
         res.send(
