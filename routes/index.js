@@ -151,6 +151,68 @@ module.exports = function(passport){
                 }
             });
             
+            //CREATE COST CENTRE Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'COST_CENTRE',
+                description: 'Cost Centre'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'COST_CENTRE_C090', description: 'C090', parent: result._id, ordinal: '0'},
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
+            
+            //CREATE COST CENTRE Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'COST_CENTRE_DESCRIPTION',
+                description: 'Cost Centre Description'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'COST_CENTRE_DESCRIPTION_HR_ADMIN', description: 'HR Admin', parent: result._id, ordinal: '0'},
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
+            
             //CREATE ETHNICITY Hierarchy
             
             TypeHierarchy.create({
@@ -324,6 +386,48 @@ module.exports = function(passport){
                         }
                     });
                 break;
+            case 'COST_CENTRE':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'COST_CENTRE' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
+            case 'COST_CENTRE_DESCRIPTION':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'COST_CENTRE_DESCRIPTION' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
             case 'EMPLOYEE_GROUP_DESCRIPTION':
                 TypeHierarchy
                     .findOne()
@@ -420,6 +524,12 @@ module.exports = function(passport){
             .where({ '_created_by': req.user._id })
             .populate('manager')
             .populate('_created_by')
+            .populate('nationality')
+            .populate('ethnicity')
+            .populate('cost_centre')
+            .populate('position')
+            .populate('employee_group_description')
+            .populate('employee_sub_group_description')
             .exec(function(err, employees){
                 if(err){
                     console.log(err);
@@ -433,21 +543,47 @@ module.exports = function(passport){
                     objArray.push(employees[i].initials);
                     objArray.push(employees[i].firstname);
                     objArray.push(employees[i].lastname);
-                    objArray.push(employees[i].nationality);
+                    
+                    if(employees[i].nationality == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i].nationality.description);
+                    }
+                    
                     objArray.push(employees[i].email);
                     objArray.push(employees[i].cellphone);
-                    objArray.push(employees[i].ethnicity);
+                    
+                    if(employees[i].ethnicity == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i].ethnicity.description);
+                    }
+                    
                     objArray.push(employees[i].position);
                     
                     if(employees[i].manager == null){
                         objArray.push("");
                     }else{
-                        objArray.push(employees[i].manager.firstname + " " + employees[i].manager.lastname);
+                        objArray.push(employees[i].position.description);
                     }
                     
-                    objArray.push(employees[i].cost_centre);
-                    objArray.push(employees[i].employee_group_description);
-                    objArray.push(employees[i].employee_sub_group_description);
+                    if(employees[i].cost_centre == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i].cost_centre.description);
+                    }
+                    
+                    if(employees[i].employee_group_description == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i].employee_group_description.description);
+                    }
+                    
+                    if(employees[i].employee_sub_group_description == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i].employee_sub_group_description.description);
+                    }
                     
                     if(employees[i]._created_by == null){
                         objArray.push("");
@@ -457,6 +593,9 @@ module.exports = function(passport){
                     
                     itemArray.push(objArray);
                 }
+            
+                console.log(itemArray);
+            
                 res.json({ "data" : itemArray });
             });
 	});
@@ -488,6 +627,13 @@ module.exports = function(passport){
                 email: req.body.email,
                 cellphone: req.body.cellphone,
                 manager: req.body.manager,
+                gender: req.body.gender,
+                nationality: req.body.nationality,
+                ethnicity: req.body.ethnicity,
+                position: req.body.position,
+                cost_centre: req.body.cost_centre,
+                employee_group_description: req.body.employee_group_description,
+                employee_sub_group_description: req.body.employee_sub_group_description,
                 _created_by: req.user._id
             }, function(err, employees){
                 if(err){
@@ -565,6 +711,27 @@ module.exports = function(passport){
 	router.get('/admin/signout', function(req, res) {
 		req.logout();
 		res.redirect('/');
+	});
+    
+    
+    /* API
+    ================================================================================*/
+    
+    /* GET employees list. */
+	router.get('/api/ussd/disclaimer', function(req, res) {
+        
+        res.type('text/plain');
+        res.send(
+            'format: ' + req.param('format') +
+            'ussd_msisdn: ' + req.param('ussd_msisdn') +
+            'ussd_session_id: ' + req.param('ussd_session_id') +
+            'ussd_request: ' + req.param('ussd_request') +
+            'ussd_type: ' + req.param('ussd_type') +
+            'ussd_node_id: ' + req.param('ussd_node_id') +
+            'ussd_node_name: ' + req.param('ussd_node_name') +
+            'ussd_response_Disclaimer: ' + req.param('ussd_response_Disclaimer')
+        );
+        
 	});
 
 	return router;
