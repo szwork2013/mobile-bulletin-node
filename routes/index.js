@@ -4,6 +4,7 @@ var router = express.Router();
 var err;
 
 var Employee = require('../models/employee');
+var TypeHierarchy = require('../models/type_hierarchy');
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -34,6 +35,88 @@ module.exports = function(passport){
     	// Display the Login page with any flash message, if any
 		res.render('admin/messages', { user: req.user });
 	});
+    
+    /* TTYPE_HIERARCHIES
+    ================================================================================*/
+    
+    /* Handle Type Hierarchies */
+	router.get('/admin/type_hierarchy', function(req, res) {
+        
+        var RefreshTypeHierarchy = function(){
+            
+            TypeHierarchy.find().remove(function(err, result){
+                if(err){
+                    console.log("Could not remove types");
+                }else{
+                    
+                }
+            });
+            
+            //CREATE COUNTRY Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'COUNTRY',
+                description: 'Country'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'COUNTRY_SOUTH_AFRICA', description: 'South Africa', parent: result._id, ordinal: '0'},
+                            { name: 'COUNTRY_ZIMBABWE', description: 'Zimbabwe', parent: result._id, ordinal: '1'}
+                        ],
+                        function(err, country_child){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(country_child);
+                            }
+                        }
+                    ); 
+                    
+                }
+            }); 
+        }
+        
+        var result = RefreshTypeHierarchy();
+        
+    });
+    
+     /* Handle Type Hierarchies */
+	router.get('/admin/get_by_type_hierarchy', function(req, res) {
+        
+        switch(req.param("type")){
+            case 'COUNTRY':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'COUNTRY' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
+        }
+    });
+    
     
     /* Employees
     ================================================================================*/
