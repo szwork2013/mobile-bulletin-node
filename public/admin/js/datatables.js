@@ -2,7 +2,24 @@ var demoDataTables = function () {
     return {
         init: function () {
             $('.datatable').dataTable({
-                "ajax": "data/datatables-arrays.txt",
+                "sAjaxSource": "data/datatables-arrays.txt",
+                "sAjaxDataProp": "data",
+                "sPaginationType": "bootstrap"
+            });
+
+            $('.chosen').chosen({
+                width: "80px"
+            });
+        }
+    };
+}();
+
+var employeesDataTables = function () {
+    return {
+        init: function () {
+            $('.employees-datatable').dataTable({
+                "sAjaxSource": "employees.json",
+                "sAjaxDataProp": "data",
                 "sPaginationType": "bootstrap"
             });
 
@@ -15,5 +32,6 @@ var demoDataTables = function () {
 
 $(function () {
     "use strict";
-    demoDataTables.init();
+    //demoDataTables.init();
+    employeesDataTables.init();
 });

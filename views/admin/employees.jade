@@ -91,32 +91,32 @@ block content
               section.panel
                 header.panel-heading Create New Employee
                 .panel-body
-                  form.form-horizontal(role='form')
+                  form.form-horizontal(role='form', action='/admin/employees', method="POST")
                     .col-md-2
                       .form-group
                         label.col-sm-7.control-label Employee No
                         .col-sm-5
-                          input.form-control(type='text')
+                          input.form-control(type='text', name='employee_no')
                     .col-md-2
                       .form-group
                         label.col-sm-7.control-label Initials
                         .col-sm-5
-                          input.form-control(type='text')
+                          input.form-control(type='text', name='initials')
                     .col-md-4
                       .form-group
-                        label.col-sm-2.control-label Name
+                        label.col-sm-2.control-label Firstname
                         .col-sm-10
-                          input.form-control(type='text')
+                          input.form-control(type='text', name='firstname')
                     .col-md-4
                       .form-group
                         label.col-sm-2.control-label Surname
                         .col-sm-10
-                          input.form-control(type='text')
+                          input.form-control(type='text', name='lastname')
                     .col-md-4
                       .form-group
                         label.col-sm-4.control-label Nationality
                         .col-sm-8
-                          select.form-control
+                          select.form-control(name='nationality')
                             option 1
                             option 2
                             option 3
@@ -126,17 +126,17 @@ block content
                       .form-group
                         label.col-sm-2.control-label Email
                         .col-sm-10
-                          input.form-control(type='text')
+                          input.form-control(type='text', name='email')
                     .col-md-4
                       .form-group
                         label.col-sm-2.control-label Cellphone
                         .col-sm-10
-                          input.form-control(type='text')
+                          input.form-control(type='text', name='cellphone')
                     .col-md-4
                       .form-group
                         label.col-sm-4.control-label Ethnic Group
                         .col-sm-8
-                          select.form-control
+                          select.form-control(name='ethnicity')
                             option 1
                             option 2
                             option 3
@@ -146,7 +146,7 @@ block content
                       .form-group
                         label.col-sm-2.control-label Position
                         .col-sm-10
-                          select.form-control
+                          select.form-control(name='position')
                             option 1
                             option 2
                             option 3
@@ -156,7 +156,7 @@ block content
                       .form-group
                         label.col-sm-2.control-label Manager
                         .col-sm-10
-                          select.form-control
+                          select.form-control(name='manager')
                             option 1
                             option 2
                             option 3
@@ -166,7 +166,7 @@ block content
                       .form-group
                         label.col-sm-5.control-label Cost Centre Description
                         .col-sm-7
-                          select.form-control
+                          select.form-control(name='cost_centre')
                             option 1
                             option 2
                             option 3
@@ -176,7 +176,7 @@ block content
                       .form-group
                         label.col-sm-7.control-label Employee Group Description
                         .col-sm-5
-                          select.form-control
+                          select.form-control(name='employee_group_description')
                             option 1
                             option 2
                             option 3
@@ -186,7 +186,7 @@ block content
                       .form-group
                         label.col-sm-7.control-label Employee Subgroup Description
                         .col-sm-5
-                          select.form-control
+                          select.form-control(name='employee_sub_group_description')
                             option 1
                             option 2
                             option 3
@@ -199,14 +199,23 @@ block content
                   h5 Employees
                 .panel-body
                   .table-responsive.no-border
-                    table.table.table-bordered.table-striped.mg-t.datatable
+                    table.table.table-bordered.table-striped.mg-t.datatable.employees-datatable
                       thead
                         tr
-                          th Name
+                          th Employee No
+                          th Initials
+                          th Firstname
+                          th Lastname
+                          th Nationality
+                          th Email
+                          th Cellphone
+                          th Ethnicity
                           th Position
-                          th Office
-                          th Age
-                          th Start Date
+                          th Manager
+                          th Cost Centre
+                          th Emp Group
+                          th Emp Sub Group
+                          th Company
             // /inner content wrapper
           // /content wrapper
           a.exit-offscreen

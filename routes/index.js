@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
+var err;
+
+var Employee = require('../models/employee');
+
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to
@@ -31,11 +35,105 @@ module.exports = function(passport){
 		res.render('admin/messages', { user: req.user });
 	});
     
+    /* Employees
+    ================================================================================*/
+    
+    var Employee = require('../models/employee');
+        
+    var GetAllEmployees = function(){
+        //Get all employees
+        Employee.find(function(err, employees){
+            if(err){
+                console.log(err);
+            }
+                console.log('deserializing employees:' + employees);
+            return employees;
+        });
+    };
+    
     /* GET employees page. */
 	router.get('/admin/employees', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/employees', { user: req.user });
+        var employees = GetAllEmployees();
+		res.render('admin/employees', { user: req.user, employees : employees });
 	});
+    
+    /* GET employees list. */
+	router.get('/admin/employees.json', function(req, res) {
+        Employee
+            .find()
+            .where({ '_created_by': req.user._id })
+            .populate('manager')
+            .populate('_created_by')
+            .exec(function(err, employees){
+                if(err){
+                    console.log(err);
+                }
+
+                var itemArray = [];
+
+                for(var i = 0; i < employees.length; i++){
+                    var objArray = [];
+                    objArray.push(employees[i].employee_no);
+                    objArray.push(employees[i].initials);
+                    objArray.push(employees[i].firstname);
+                    objArray.push(employees[i].lastname);
+                    objArray.push(employees[i].nationality);
+                    objArray.push(employees[i].email);
+                    objArray.push(employees[i].cellphone);
+                    objArray.push(employees[i].ethnicity);
+                    objArray.push(employees[i].position);
+                    
+                    if(employees[i].manager == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i].manager.firstname);
+                    }
+                    
+                    objArray.push(employees[i].cost_centre);
+                    objArray.push(employees[i].employee_group_description);
+                    objArray.push(employees[i].employee_sub_group_description);
+                    
+                    if(employees[i]._created_by == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i]._created_by.company);
+                    }
+                    
+                    itemArray.push(objArray);
+                }
+                res.json({ "data" : itemArray });
+            });
+	});
+    
+    /* Handle Login POST */
+	router.post('/admin/employees', function(req, res) {
+        
+        var CreateEmployee = function(){
+            Employee.create({
+                employee_no: req.body.employee_no,
+                initials: req.body.initials,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                email: req.body.email,
+                cellphone: req.body.cellphone,
+                _created_by: req.user._id
+            }, function(err, employees){
+                if(err){
+                    this.err = err;
+                console.log(err);
+                }
+                console.log('deserializing employees:' + employees);
+                return GetAllEmployees();
+            });
+        }
+        
+        var employees = CreateEmployee();
+        
+    	// Display the Login page with any flash message, if any
+		res.render('admin/employees', { user: req.user, employees : employees, err: err });
+        
+    });
     
     /* GET department page. */
 	router.get('/admin/departments', function(req, res) {

@@ -6,5 +6,6 @@ module.exports = mongoose.model('User', {
     company: String,
     email: String,
     website: String,
-    telephone: String
+    telephone: String,
+    departments : [{ type: mongoose.Schema.Types.ObjectId, ref : 'Department' }]
 });
