@@ -3,7 +3,7 @@ var selectors = function () {
         nationality: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=COUNTRY",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -16,7 +16,7 @@ var selectors = function () {
         ethnicity: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=ETHNICITY",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -29,7 +29,7 @@ var selectors = function () {
         gender: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=GENDER",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -42,7 +42,7 @@ var selectors = function () {
         position: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=POSITION_DESCRIPTION",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -55,7 +55,7 @@ var selectors = function () {
         cost_centre: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=COST_CENTRE",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -68,7 +68,7 @@ var selectors = function () {
         cost_centre_description: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=COST_CENTRE_DESCRIPTION",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -81,7 +81,7 @@ var selectors = function () {
         employee_group_description: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=EMPLOYEE_GROUP_DESCRIPTION",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -94,7 +94,7 @@ var selectors = function () {
         employee_sub_group_description: function(){
             $.ajax({
                 url: "get_by_type_hierarchy?type=EMPLOYEE_SUB_GROUP_DESCRIPTION",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
@@ -107,7 +107,7 @@ var selectors = function () {
         manager: function () {
             $.ajax({
                 url: "employees-raw.json",
-                cache: false,
+                cache: true,
                 success: function(results){
                     var options = "";
                     for(var i = 0; i < results.data.length; i++){
