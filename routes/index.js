@@ -1,4 +1,5 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
 
 var err;
@@ -559,12 +560,16 @@ module.exports = function(passport){
                         objArray.push(employees[i].ethnicity.description);
                     }
                     
-                    objArray.push(employees[i].position);
+                    if(employees[i].position == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(employees[i].position.description);
+                    }
                     
                     if(employees[i].manager == null){
                         objArray.push("");
                     }else{
-                        objArray.push(employees[i].position.description);
+                        objArray.push(employees[i].manager.description);
                     }
                     
                     if(employees[i].cost_centre == null){
@@ -719,16 +724,55 @@ module.exports = function(passport){
     
     /* GET employees list. */
 	router.get('/api/ussd/registration_status', function(req, res) {
-        res.type('text/plain');
-        res.send(
-            'ussd_msisdn: ' + req.param('ussd_msisdn') +
-            'ussd_session_id: ' + req.param('ussd_session_id') +
-            'ussd_request: ' + req.param('ussd_request') +
-            'ussd_type: ' + req.param('ussd_type') +
-            'ussd_node_id: ' + req.param('ussd_node_id') +
-            'ussd_node_name: ' + req.param('ussd_node_name') +
-            'ussd_response_Disclaimer: ' + req.param('ussd_response_Disclaimer')
-        );
+        
+        Employee
+            .findOne()
+            .where({ employee_no: req.param('ussd_response_Registration') })
+            .exec(function(err, employee){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(employee);
+                    if(employee != null){
+                        
+                        if(employee.active == true){
+                            res.type('text/plain');
+                            res.send("Please note that you are already registered to use the system. Use your 4 digit pin to login.");
+                        }else{
+                            
+                            var pin = Math.floor(Math.random() * 9000) + 1000;
+                            
+                            Employee
+                                .findOneAndUpdate(
+                                    { 'employee_no': req.param('ussd_response_Registration') }, 
+                                    { active : 'true', cellphone : req.param('ussd_msisdn'), pin: pin}, 
+                                    function(err, employee){
+                                        if(err){
+                                            console.log(employee);
+                                        }else{
+                                            console.log(employee);
+                                            res.type('text/plain');
+                                            
+                                            request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Congratulations " + employee.firstname + " " + employee.lastname + ". Your registration to Mobile Bulletin with number " + employee.cellphone + " was successful. Your pin is " + pin + "&from=27726422105", function (error, response, body) {
+                                                if (!error && response.statusCode == 200) {
+                                                    console.log(response)
+                                                }else{
+                                                    console.log(response)
+                                                }
+                                            });
+                                            
+                                            res.send("Congratulations " + employee.firstname + " " + employee.lastname + ". Your registration to Mobile Bulletin with number " + employee.cellphone + " was successful. Your pin will be sent to you via SMS.");
+                                        }
+                                    }
+                                );
+                        }
+                        
+                    }else{
+                        res.type('text/plain');
+                        res.send("It seems that your employee number is not registered on the system. Please contact your human resource personal.");
+                    }
+                }
+            });
 	});
 
 	return router;

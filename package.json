@@ -17,8 +17,9 @@
     "passport": "~0.2.0",
     "passport-local": "~1.0.0",
     "static-favicon": "~2.0.0-alpha",
-      "debug": "*",
-      "bcrypt-nodejs" : "*",
-    "connect-flash" : "*"
+    "debug": "*",
+    "bcrypt-nodejs" : "*",
+    "connect-flash" : "*",
+      "request" : "*"
   }
 }
