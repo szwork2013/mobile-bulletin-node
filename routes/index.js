@@ -553,6 +553,7 @@ module.exports = function(passport){
                     
                     objArray.push(employees[i].email);
                     objArray.push(employees[i].cellphone);
+                    objArray.push(employees[i].pin);
                     
                     if(employees[i].ethnicity == null){
                         objArray.push("");
@@ -737,7 +738,7 @@ module.exports = function(passport){
                         
                         if(employee.active == true){
                             res.type('text/plain');
-                            res.send("Please note that you are already registered to use the system. Use your 4 digit pin to login.");
+                            res.send("Mobile Bulletin \n \nPlease note that you are already registered to use Mobile Bulletin. Use your 4 digit pin to login.");
                         }else{
                             
                             var pin = Math.floor(Math.random() * 9000) + 1000;
@@ -769,7 +770,100 @@ module.exports = function(passport){
                         
                     }else{
                         res.type('text/plain');
-                        res.send("It seems that your employee number is not registered on the system. Please contact your human resource personal.");
+                        res.send("Mobile Bulletin \n \nIt seems that your employee number is not registered to use Mobile Bulletin. Please contact your human resource personal for more information.");
+                    }
+                }
+            });
+	});
+    
+    /* GET employees list. */
+	router.get('/api/ussd/login_status', function(req, res) {
+        
+        Employee
+            .findOne()
+            .where({ cellphone: req.param('ussd_msisdn') })
+            .exec(function(err, employee){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(employee);
+                    if(employee != null){
+                        
+                        if(employee.active == true){
+                            
+                            console.log(employee);
+                            res.type('text/plain');
+                            res.send("Welcome " + employee.firstname + " " + employee.lastname + ". Please enter your 4 digit pin to continue. \n\n7. Forgot Password");
+                            
+                        }else{
+                            
+                            res.type('text/plain');
+                        res.send("Mobile Bulletin \n \nIt seems that your Mobile Bulletin account has not been activeted. Please proceed to the registration screen to continue activation. \n\n8. Register \n0. Exit");
+                            
+                        }
+                        
+                    }else{
+                        res.type('text/plain');
+                        res.send("Mobile Bulletin \n \nIt seems that you have not registered to use Mobile Bulletin. Please proceed to the registration screen to register. \n\n 8.Register \n0. Exit");
+                    }
+                }
+            });
+	});
+    
+    /* GET employees list. */
+	router.get('/api/ussd/home_info', function(req, res) {
+        
+        Employee
+            .findOne()
+            .where({ cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')})
+            .exec(function(err, employee){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(employee);
+                    if(employee != null){
+                        console.log(employee);
+                        res.type('text/plain');
+                        res.send("Scaw Metals Group \n\nWelcome " + employee.firstname + " " + employee.lastname + " \n\n1. Change Language \n2. Notifications");
+                        
+                    }else{
+                        console.log(employee);
+                        res.type('text/plain');
+                        res.send("Mobile Bulletin \n \nIt seems that you have entered the wrong pin. Please go back and try again or click 'Forgot Password' to recover your pin. \n\n8. Forgot Password \n9. Back \n0. Exit");
+                    }
+                }
+            });
+	});
+    
+    /* GET employees list. */
+	router.get('/api/ussd/forgot_password', function(req, res) {
+        
+        Employee
+            .findOne()
+            .where({ cellphone: req.param('ussd_msisdn'),  active: true})
+            .exec(function(err, employee){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(employee);
+                    if(employee != null){
+                        console.log(employee);
+                        
+                        request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + " your Mobile Bulletin pin is " + employee.pin + "&from=27726422105", function (error, response, body) {
+                                                if (!error && response.statusCode == 200) {
+                                                    console.log(response)
+                                                }else{
+                                                    console.log(response)
+                                                }
+                                            });
+                        
+                        res.type('text/plain');
+                        res.send("Scaw Metals Group \n\nThank you " + employee.firstname + " " + employee.lastname + ". Your pin has been sent to you via sms to " + employee.cellphone);
+                        
+                    }else{
+                        console.log(employee);
+                        res.type('text/plain');
+                        res.send("Mobile Bulletin \n \nIt seems that your account is not active. Please try to register instead.");
                     }
                 }
             });
