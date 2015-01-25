@@ -59,7 +59,7 @@ module.exports = function(passport){
                     
                     Employee
                         .find()
-                        .where({ groups : message.group })
+                        .where({ groups : message.group, _created_by: req.user._id })
                         .exec(function(err, employee){
                             if(err){
                                 console.log(err);
@@ -117,7 +117,7 @@ module.exports = function(passport){
                     if(message[i].group == null){
                         objArray.push("");
                     }else{
-                        objArray.push(message[i].group.description);
+                        objArray.push(message[i].group.name);
                     }
                     
                     itemArray.push(objArray);
@@ -707,7 +707,11 @@ module.exports = function(passport){
                     if(employees[i].groups == null){
                         objArray.push("");
                     }else{
-                        objArray.push(employees[i].groups[0].description);
+                        if(employees[i].groups != null){
+                            for(var x = 0; x < employees[i].groups.length; x++){
+                                objArray.push(employees[i].groups[x].name + " ");
+                            }
+                        }
                     }
                     
                     if(employees[i].language == null){
@@ -751,7 +755,7 @@ module.exports = function(passport){
                 lastname: req.body.lastname,
                 email: req.body.email,
                 cellphone: req.body.cellphone,
-                groups: [req.body.group],
+                groups: req.body.group,
                 language: req.body.language,
                 _created_by: req.user._id
             }, function(err, employee){
