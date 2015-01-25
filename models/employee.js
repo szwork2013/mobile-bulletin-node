@@ -5,7 +5,7 @@ module.exports = mongoose.model('Employee', {
     initials: String,
     firstname: String,
     lastname: String,
-    nationality: [{ type: mongoose.Schema.Types.ObjectId, ref: 'TypeHierarchy' }],
+    nationality: { type: mongoose.Schema.Types.ObjectId, ref: 'TypeHierarchy' },
     email: String,
     cellphone: String,
     email_notifications: { type: Boolean, default: true },
