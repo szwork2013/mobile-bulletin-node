@@ -59,6 +59,7 @@ module.exports = function(passport){
                     
                     Employee
                         .find()
+                        .where({ groups : message.group })
                         .exec(function(err, employee){
                             if(err){
                                 console.log(err);
@@ -69,7 +70,7 @@ module.exports = function(passport){
                                 
                                 
                                 for(var i = 0; i < employee.length; i++){
-                                    request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=" + message.content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                                    request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee[i].cellphone + "&text=" + message.content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
                                         if (!error && response.statusCode == 200) {
                                             //console.log(response)
                                         }else{
