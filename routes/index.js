@@ -641,12 +641,20 @@ module.exports = function(passport){
                 employee_group_description: req.body.employee_group_description,
                 employee_sub_group_description: req.body.employee_sub_group_description,
                 _created_by: req.user._id
-            }, function(err, employees){
+            }, function(err, employee){
                 if(err){
                     this.err = err;
-                console.log(err);
+                    console.log(err);
+                }else{
+                    request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + ". " + req.user.company + " has added you to Mobile Bulletin for real time communications and updates.&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                        if (!error && response.statusCode == 200) {
+                            console.log(response)
+                        }else{
+                            console.log(response)
+                        }
+                    });
                 }
-                console.log('deserializing employees:' + employees);
+                console.log('deserializing employees:' + employee);
                 return GetAllEmployees();
             });
         }
@@ -829,7 +837,7 @@ module.exports = function(passport){
                     }else{
                         console.log(employee);
                         res.type('text/plain');
-                        res.send("Mobile Bulletin \n \nIt seems that you have entered the wrong pin. Please go back and try again or click 'Forgot Password' to recover your pin. \n\n8. Forgot Password \n9. Back \n0. Exit");
+                        res.send("Mobile Bulletin \n \nYou have entered the wrong pin. Please go back and try again or click 'Forgot Password' to recover your pin. \n\n7. Forgot Password \n9. Back \n0. Exit");
                     }
                 }
             });
@@ -850,12 +858,12 @@ module.exports = function(passport){
                         console.log(employee);
                         
                         request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + " your Mobile Bulletin pin is " + employee.pin + "&from=27726422105", function (error, response, body) {
-                                                if (!error && response.statusCode == 200) {
-                                                    console.log(response)
-                                                }else{
-                                                    console.log(response)
-                                                }
-                                            });
+                            if (!error && response.statusCode == 200) {
+                                console.log(response)
+                            }else{
+                                console.log(response)
+                            }
+                        });
                         
                         res.type('text/plain');
                         res.send("Scaw Metals Group \n\nThank you " + employee.firstname + " " + employee.lastname + ". Your pin has been sent to you via sms to " + employee.cellphone);
