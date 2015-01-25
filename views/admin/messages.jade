@@ -66,9 +66,9 @@ block content
                   i.ti-user
                   span Employees
               li
-                a(href='/admin/departments')
+                a(href='/admin/groups')
                   i.ti-briefcase
-                  span Departments
+                  span Groups
               li
                 a(href='/admin/support')
                   i.ti-help-alt
@@ -91,42 +91,17 @@ block content
               section.panel
                 header.panel-heading Create New Message
                 .panel-body
-                  form.form-horizontal(role='form')
-                    .col-md-6
+                  form.form-horizontal(role='form', action='/admin/messages', method="POST")
+                    .col-md-12
                       .form-group
-                        label.col-sm-2.control-label Department
-                        .col-sm-10
-                          select.form-control
-                            option 1
-                            option 2
-                            option 3
-                            option 4
-                            option 5
-                    .col-md-6
+                        div(style='padding-left: 15px; padding-right: 15px;')
+                            label(for='group') Group
+                            select.form-control(name='group')
+                    .col-md-12
                       .form-group
-                        label.col-sm-2.control-label Employee
-                        .col-sm-10
-                          select.form-control
-                            option 1
-                            option 2
-                            option 3
-                            option 4
-                            option 5
-                    .col-md-4
-                      .form-group
-                        div(style='padding: 15px;')
-                          label(for='exampleInputEmail1') English Message
-                          textarea.form-control(rows='3')
-                    .col-md-4
-                      .form-group
-                        div(style='padding: 15px;')
-                          label(for='exampleInputEmail1') Sotho Message
-                          textarea.form-control(rows='3')
-                    .col-md-4
-                      .form-group
-                        div(style='padding: 15px;')
-                          label(for='exampleInputEmail1') Zulu Message
-                          textarea.form-control(rows='3')
+                        div(style='padding-left: 15px; padding-right: 15px;')
+                          label(for='content') English Message
+                          textarea.form-control(rows='2', name='content')
                     .col-md-12
                       button.btn.btn-default.pull-right(type='submit') Send Message
               section.panel.panel-default
@@ -134,14 +109,12 @@ block content
                   h5 Messages
                 .panel-body
                   .table-responsive.no-border
-                    table.table.table-bordered.table-striped.mg-t.datatable
+                    table.table.table-bordered.table-striped.mg-t.datatable.messages-datatable
                       thead
                         tr
-                          th Name
-                          th Position
-                          th Office
-                          th Age
-                          th Start Date
+                          th Date
+                          th Content
+                          th Group
             // /inner content wrapper
           // /content wrapper
           a.exit-offscreen

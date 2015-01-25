@@ -66,9 +66,9 @@ block content
                   i.ti-user
                   span Employees
               li
-                a(href='/admin/departments')
+                a(href='/admin/groups')
                   i.ti-briefcase
-                  span Departments
+                  span Groups
               li
                 a(href='/admin/support')
                   i.ti-help-alt
@@ -87,41 +87,27 @@ block content
               ol.breadcrumb
                 li
                   a(href='javascript:;') Mobile Bulletin
-                li.active Departments
+                li.active Groups
               section.panel
-                header.panel-heading Create New Department
+                header.panel-heading Create New Group
                 .panel-body
-                  form.form-horizontal(role='form')
-                    .col-md-6
+                  form.form-horizontal(role='form', action='/admin/groups', method="POST")
+                    .col-md-12
                       .form-group
                         label.col-sm-2.control-label Name
                         .col-sm-10
-                          input.form-control(type='text')
-                    .col-md-6
-                      .form-group
-                        label.col-sm-2.control-label Head
-                        .col-sm-10
-                          select.form-control
-                            option 1
-                            option 2
-                            option 3
-                            option 4
-                            option 5
+                          input.form-control(type='text', name='name')
                     .col-md-12
-                      button.btn.btn-default.pull-right(type='submit') Create Department
+                      button.btn.btn-default.pull-right(type='submit') Create Group
               section.panel.panel-default
                 header.panel-heading
                   h5 Messages
                 .panel-body
                   .table-responsive.no-border
-                    table.table.table-bordered.table-striped.mg-t.datatable
+                    table.table.table-bordered.table-striped.mg-t.datatable.groups-datatable
                       thead
                         tr
                           th Name
-                          th Position
-                          th Office
-                          th Age
-                          th Start Date
             // /inner content wrapper
           // /content wrapper
           a.exit-offscreen

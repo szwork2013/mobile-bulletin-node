@@ -1,8 +1,30 @@
-var employeesDataTables = function () {
+var datatables = function () {
     return {
-        init: function () {
+        employees: function () {
             $('.employees-datatable').dataTable({
                 "sAjaxSource": "employees-table.json",
+                "sAjaxDataProp": "data",
+                "sPaginationType": "bootstrap"
+            });
+
+            $('.chosen').chosen({
+                width: "80px"
+            });
+        },
+        groups: function () {
+            $('.groups-datatable').dataTable({
+                "sAjaxSource": "groups-table.json",
+                "sAjaxDataProp": "data",
+                "sPaginationType": "bootstrap"
+            });
+
+            $('.chosen').chosen({
+                width: "80px"
+            });
+        },
+        messages: function () {
+            $('.messages-datatable').dataTable({
+                "sAjaxSource": "messages-table.json",
                 "sAjaxDataProp": "data",
                 "sPaginationType": "bootstrap"
             });
@@ -16,5 +38,7 @@ var employeesDataTables = function () {
 
 $(function () {
     "use strict";
-    employeesDataTables.init();
+    datatables.employees();
+    datatables.groups();
+    datatables.messages();
 });

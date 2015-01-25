@@ -6,6 +6,8 @@ var err;
 
 var Employee = require('../models/employee');
 var TypeHierarchy = require('../models/type_hierarchy');
+var Message = require('../models/message');
+var Group = require('../models/group');
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -31,10 +33,113 @@ module.exports = function(passport){
 		res.render('front/team', { message: req.flash('message') });
 	});
     
+    /* MESSAGES
+    ================================================================================*/
+    
     /* GET messages page. */
 	router.get('/admin/messages', function(req, res) {
     	// Display the Login page with any flash message, if any
 		res.render('admin/messages', { user: req.user });
+	});
+    
+    /* Handle Login POST */
+	router.post('/admin/messages', function(req, res) {
+        
+        var CreateMessage = function(){
+            Message.create({
+                group: req.body.group,
+                content: req.body.content,
+                _created_by: req.user._id
+            }, function(err, message){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(message);
+                    
+                    Employee
+                        .find()
+                        .exec(function(err, employee){
+                            if(err){
+                                console.log(err);
+                            }else{
+                                
+                                console.log("Message :" + employee);
+                                
+                                
+                                
+                                for(var i = 0; i < employee.length; i++){
+                                    request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=" + message.content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                                        if (!error && response.statusCode == 200) {
+                                            //console.log(response)
+                                        }else{
+                                            //console.log(response)
+                                        }
+                                    });
+                                }
+                                
+                            }
+                    });
+                    
+                }
+            });
+        }
+        
+        CreateMessage();
+        
+		res.render('admin/messages', { user: req.user, err: err });
+        
+    });
+    
+    /* GET employees list. */
+	router.get('/admin/messages-table.json', function(req, res) {
+        Message
+            .find()
+            .where({ _created_by: req.user._id })
+            .populate('group')
+            .populate('_created_by')
+            .exec(function(err, message){
+                if(err){
+                    console.log(err);
+                }
+
+                var itemArray = [];
+
+                for(var i = 0; i < message.length; i++){
+                    var objArray = [];
+                    
+                    
+                    objArray.push(message[i]._created);
+                    
+                    objArray.push(message[i].content);
+                    
+                    if(message[i].group == null){
+                        objArray.push("");
+                    }else{
+                        objArray.push(message[i].group.description);
+                    }
+                    
+                    itemArray.push(objArray);
+                }
+            
+                console.log(itemArray);
+            
+                res.json({ "data" : itemArray });
+            });
+	});
+    
+    /* GET employees list. */
+	router.get('/admin/messages-raw.json', function(req, res) {
+        Message
+            .find()
+            .where({ _created_by: req.user._id })
+            .populate('_created_by')
+            .exec(function(err, groups){
+                if(err){
+                    console.log(err);
+                }
+                res.json({ "data" : groups });
+            });
 	});
     
     /* TTYPE_HIERARCHIES
@@ -71,6 +176,39 @@ module.exports = function(passport){
                         [
                             { name: 'COUNTRY_SOUTH_AFRICA', description: 'South Africa', parent: result._id, ordinal: '0'},
                             { name: 'COUNTRY_ZIMBABWE', description: 'Zimbabwe', parent: result._id, ordinal: '1'}
+                        ],
+                        function(err, children){
+                            if(err){
+                                this.err = err;
+                                console.log(err);
+                            }else{
+                                console.log(children);
+                            }
+                        }
+                    ); 
+                    
+                }
+            });
+            
+            //CREATE COUNTRY Hierarchy
+            
+            TypeHierarchy.create({
+                name: 'LANGUAGE',
+                description: 'Language'
+            }, function(err, result){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(result);  
+                    
+                    //CREATE COUNTY CHILDREN
+
+                    TypeHierarchy.create(
+                        [
+                            { name: 'LANGUAGE_ENGLISH', description: 'English', parent: result._id, ordinal: '0'},
+                            { name: 'LANGUAGE_ZULU', description: 'Zulu', parent: result._id, ordinal: '1'},
+                            { name: 'LANGUAGE_SOTHO', description: 'Sotho', parent: result._id, ordinal: '2'},
                         ],
                         function(err, children){
                             if(err){
@@ -345,6 +483,27 @@ module.exports = function(passport){
                         }
                     });
                 break;
+            case 'LANGUAGE':
+                TypeHierarchy
+                    .findOne()
+                    .where({ name: 'LANGUAGE' })
+                    .exec(function(err, result){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            TypeHierarchy
+                                .find()
+                                .where({ parent: result._id })
+                                .populate('parent')
+                                .exec(function(err, types){
+                                    if(err){
+                                        console.log(err);
+                                    }
+                                    res.json({ "data" : types });
+                                });
+                        }
+                    });
+                break;
             case 'GENDER':
                 TypeHierarchy
                     .findOne()
@@ -525,12 +684,8 @@ module.exports = function(passport){
             .where({ '_created_by': req.user._id })
             .populate('manager')
             .populate('_created_by')
-            .populate('nationality')
-            .populate('ethnicity')
-            .populate('cost_centre')
-            .populate('position')
-            .populate('employee_group_description')
-            .populate('employee_sub_group_description')
+            .populate('groups')
+            .populate('language')
             .exec(function(err, employees){
                 if(err){
                     console.log(err);
@@ -544,57 +699,20 @@ module.exports = function(passport){
                     objArray.push(employees[i].initials);
                     objArray.push(employees[i].firstname);
                     objArray.push(employees[i].lastname);
-                    
-                    if(employees[i].nationality == null){
-                        objArray.push("");
-                    }else{
-                        objArray.push(employees[i].nationality.description);
-                    }
-                    
                     objArray.push(employees[i].email);
                     objArray.push(employees[i].cellphone);
                     objArray.push(employees[i].pin);
                     
-                    if(employees[i].ethnicity == null){
+                    if(employees[i].groups == null){
                         objArray.push("");
                     }else{
-                        objArray.push(employees[i].ethnicity.description);
+                        objArray.push(employees[i].groups[0].description);
                     }
                     
-                    if(employees[i].position == null){
+                    if(employees[i].language == null){
                         objArray.push("");
                     }else{
-                        objArray.push(employees[i].position.description);
-                    }
-                    
-                    if(employees[i].manager == null){
-                        objArray.push("");
-                    }else{
-                        objArray.push(employees[i].manager.description);
-                    }
-                    
-                    if(employees[i].cost_centre == null){
-                        objArray.push("");
-                    }else{
-                        objArray.push(employees[i].cost_centre.description);
-                    }
-                    
-                    if(employees[i].employee_group_description == null){
-                        objArray.push("");
-                    }else{
-                        objArray.push(employees[i].employee_group_description.description);
-                    }
-                    
-                    if(employees[i].employee_sub_group_description == null){
-                        objArray.push("");
-                    }else{
-                        objArray.push(employees[i].employee_sub_group_description.description);
-                    }
-                    
-                    if(employees[i]._created_by == null){
-                        objArray.push("");
-                    }else{
-                        objArray.push(employees[i]._created_by.company);
+                        objArray.push(employees[i].language.description);
                     }
                     
                     itemArray.push(objArray);
@@ -632,14 +750,8 @@ module.exports = function(passport){
                 lastname: req.body.lastname,
                 email: req.body.email,
                 cellphone: req.body.cellphone,
-                manager: req.body.manager,
-                gender: req.body.gender,
-                nationality: req.body.nationality,
-                ethnicity: req.body.ethnicity,
-                position: req.body.position,
-                cost_centre: req.body.cost_centre,
-                employee_group_description: req.body.employee_group_description,
-                employee_sub_group_description: req.body.employee_sub_group_description,
+                groups: [req.body.group],
+                language: req.body.language,
                 _created_by: req.user._id
             }, function(err, employee){
                 if(err){
@@ -648,9 +760,9 @@ module.exports = function(passport){
                 }else{
                     request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + ". " + req.user.company + " has added you to Mobile Bulletin for real time communications and updates.&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
                         if (!error && response.statusCode == 200) {
-                            console.log(response)
+                            //console.log(response)
                         }else{
-                            console.log(response)
+                            //console.log(response)
                         }
                     });
                 }
@@ -666,10 +778,78 @@ module.exports = function(passport){
         
     });
     
-    /* GET department page. */
-	router.get('/admin/departments', function(req, res) {
+    
+    
+    /* Groups
+    ================================================================================*/
+    
+    /* GET group page. */
+	router.get('/admin/groups', function(req, res) {
     	// Display the Login page with any flash message, if any
-		res.render('admin/departments', { user: req.user });
+		res.render('admin/groups', { user: req.user });
+	});
+    
+    /* Handle Login POST */
+	router.post('/admin/groups', function(req, res) {
+        
+        var CreateGroup = function(){
+            Group.create({
+                name: req.body.name,
+                _created_by: req.user._id
+            }, function(err, group){
+                if(err){
+                    this.err = err;
+                    console.log(err);
+                }else{
+                    console.log(group);
+                }
+            });
+        }
+        
+        CreateGroup();
+        
+		res.render('admin/groups', { user: req.user, err: err });
+        
+    });
+    
+    /* GET employees list. */
+	router.get('/admin/groups-table.json', function(req, res) {
+        Group
+            .find()
+            .where({ '_created_by': req.user._id })
+            .exec(function(err, groups){
+                if(err){
+                    console.log(err);
+                }
+
+                var itemArray = [];
+
+                for(var i = 0; i < groups.length; i++){
+                    var objArray = [];
+                    
+                    objArray.push(groups[i].name);
+                    itemArray.push(objArray);
+                }
+            
+                console.log(itemArray);
+            
+                res.json({ "data" : itemArray });
+            });
+	});
+    
+    /* GET employees list. */
+	router.get('/admin/groups-raw.json', function(req, res) {
+        Group
+            .find()
+            .where({ '_created_by': req.user._id })
+            .populate('manager')
+            .populate('_created_by')
+            .exec(function(err, groups){
+                if(err){
+                    console.log(err);
+                }
+                res.json({ "data" : groups });
+            });
 	});
     
     /* GET support page. */

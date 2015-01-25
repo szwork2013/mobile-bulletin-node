@@ -66,9 +66,9 @@ block content
                   i.ti-user
                   span Employees
               li
-                a(href='/admin/departments')
+                a(href='/admin/groups')
                   i.ti-briefcase
-                  span Departments
+                  span Groups
               li
                 a(href='/admin/support')
                   i.ti-help-alt
@@ -99,29 +99,19 @@ block content
                           input.form-control(type='text', name='employee_no')
                     .col-md-2
                       .form-group
-                        label.col-sm-7.control-label Initials
-                        .col-sm-5
-                          input.form-control(type='text', name='initials')
-                    .col-md-2
-                      .form-group
-                        label.col-sm-5.control-label Gender
+                        label.col-sm-5.control-label Initials
                         .col-sm-7
-                          select.form-control(name='gender')
-                    .col-md-3
+                          input.form-control(type='text', name='initials')
+                    .col-md-4
                       .form-group
                         label.col-sm-4.control-label Firstname
                         .col-sm-8
                           input.form-control(type='text', name='firstname')
-                    .col-md-3
+                    .col-md-4
                       .form-group
                         label.col-sm-4.control-label Surname
                         .col-sm-8
                           input.form-control(type='text', name='lastname')
-                    .col-md-4
-                      .form-group
-                        label.col-sm-4.control-label Nationality
-                        .col-sm-8
-                          select.form-control(name='nationality')
                     .col-md-4
                       .form-group
                         label.col-sm-2.control-label Email
@@ -134,34 +124,14 @@ block content
                           input.form-control(type='text', name='cellphone')
                     .col-md-4
                       .form-group
-                        label.col-sm-4.control-label Ethnic Group
+                        label.col-sm-4.control-label Group
                         .col-sm-8
-                          select.form-control(name='ethnicity')
+                          select.form-control(name='group')
                     .col-md-4
                       .form-group
-                        label.col-sm-2.control-label Position
-                        .col-sm-10
-                          select.form-control(name='position')
-                    .col-md-4
-                      .form-group
-                        label.col-sm-2.control-label Manager
-                        .col-sm-10
-                          select.form-control(name='manager')
-                    .col-md-4
-                      .form-group
-                        label.col-sm-5.control-label Cost Centre
-                        .col-sm-7
-                          select.form-control(name='cost_centre')
-                    .col-md-4
-                      .form-group
-                        label.col-sm-7.control-label Employee Group Description
-                        .col-sm-5
-                          select.form-control(name='employee_group_description')
-                    .col-md-4
-                      .form-group
-                        label.col-sm-7.control-label Employee Subgroup Description
-                        .col-sm-5
-                          select.form-control(name='employee_sub_group_description')
+                        label.col-sm-4.control-label Language
+                        .col-sm-8
+                          select.form-control(name='language')
                     .col-md-12
                       button.btn.btn-default.pull-right(type='submit') Create Employee
               section.panel.panel-default
@@ -176,16 +146,11 @@ block content
                           th Initials
                           th Firstname
                           th Lastname
-                          th Nationality
                           th Email
                           th Cellphone
                           th Pin
-                          th Ethnicity
-                          th Position
-                          th Manager
-                          th Cost Centre
-                          th Emp Group
-                          th Emp Sub Group
+                          th Group
+                          th Language
             // /inner content wrapper
           // /content wrapper
           a.exit-offscreen
