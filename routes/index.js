@@ -48,7 +48,9 @@ module.exports = function(passport){
         var CreateMessage = function(){
             Message.create({
                 group: req.body.group,
-                content: req.body.content,
+                english_content: req.body.english_content,
+                zulu_content: req.body.zulu_content,
+                sotho_content: req.body.sotho_content,
                 _created_by: req.user._id
             }, function(err, message){
                 if(err){
@@ -59,24 +61,57 @@ module.exports = function(passport){
                     
                     Employee
                         .find()
-                        .where({ groups : message.group, _created_by: req.user._id })
+                        .where({ groups : message.group, _created_by: req.user._id, sms_notifications: true })
+                        .populate('language')
                         .exec(function(err, employee){
                             if(err){
                                 console.log(err);
                             }else{
                                 
-                                console.log("Message :" + employee);
-                                
+                                console.log("Message :" + employee);                              
                                 
                                 
                                 for(var i = 0; i < employee.length; i++){
-                                    request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee[i].cellphone + "&text=" + message.content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
-                                        if (!error && response.statusCode == 200) {
-                                            //console.log(response)
+                                    
+                                    if(employee[i].language != null){
+                                        
+                                        console.log("Yaaaaaaaaaaaaaaay" + employee[i].language.description);
+                                        
+                                        
+                                        if(employee[i].language.description == "English"){
+                                            request("http://api.panaceamobile.com/json?action=message_send&username=ThaboShokgolo&password=P@ssw0rd&to=" + employee[i].cellphone + "&text=" + message.english_content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                                                if (!error && response.statusCode == 200) {
+                                                    //console.log(response)
+                                                }else{
+                                                    //console.log(response)
+                                                }
+                                            });
+                                        }else if(employee[i].language.description == "Zulu"){
+                                            request("http://api.panaceamobile.com/json?action=message_send&username=ThaboShokgolo&password=P@ssw0rd&to=" + employee[i].cellphone + "&text=" + message.zulu_content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                                                if (!error && response.statusCode == 200) {
+                                                    //console.log(response)
+                                                }else{
+                                                    //console.log(response)
+                                                }
+                                            });
+                                        }else if(employee[i].language.description == "Sotho"){
+                                            request("http://api.panaceamobile.com/json?action=message_send&username=ThaboShokgolo&password=P@ssw0rd&to=" + employee[i].cellphone + "&text=" + message.sotho_content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                                                if (!error && response.statusCode == 200) {
+                                                    //console.log(response)
+                                                }else{
+                                                    //console.log(response)
+                                                }
+                                            });
                                         }else{
-                                            //console.log(response)
+                                            request("http://api.panaceamobile.com/json?action=message_send&username=ThaboShokgolo&password=P@ssw0rd&to=" + employee[i].cellphone + "&text=" + message.content + "&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                                                if (!error && response.statusCode == 200) {
+                                                    //console.log(response)
+                                                }else{
+                                                    //console.log(response)
+                                                }
+                                            });
                                         }
-                                    });
+                                    }
                                 }
                                 
                             }
@@ -112,7 +147,9 @@ module.exports = function(passport){
                     
                     objArray.push(message[i]._created);
                     
-                    objArray.push(message[i].content);
+                    objArray.push(message[i].english_content);
+                    objArray.push(message[i].zulu_content);
+                    objArray.push(message[i].sotho_content);
                     
                     if(message[i].group == null){
                         objArray.push("");
@@ -763,7 +800,7 @@ module.exports = function(passport){
                     this.err = err;
                     console.log(err);
                 }else{
-                    request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + ". " + req.user.company + " has added you to Mobile Bulletin for real time communications and updates.&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
+                    request("http://api.panaceamobile.com/json?action=message_send&username=ThaboShokgolo&password=P@ssw0rd&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + ". " + req.user.company + " has added you to Mobile Bulletin for real time communications and updates.&from=27726422105&auto_detect_encoding=1", function (error, response, body) {
                         if (!error && response.statusCode == 200) {
                             //console.log(response)
                         }else{
@@ -947,7 +984,7 @@ module.exports = function(passport){
                                             console.log(employee);
                                             res.type('text/plain');
                                             
-                                            request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Congratulations " + employee.firstname + " " + employee.lastname + ". Your registration to Mobile Bulletin with number " + employee.cellphone + " was successful. Your pin is " + pin + "&from=27726422105", function (error, response, body) {
+                                            request("http://api.panaceamobile.com/json?action=message_send&username=ThaboShokgolo&password=P@ssw0rd&to=" + employee.cellphone + "&text=Congratulations " + employee.firstname + " " + employee.lastname + ". Your registration to Mobile Bulletin with number " + employee.cellphone + " was successful. Your pin is " + pin + "&from=27726422105", function (error, response, body) {
                                                 if (!error && response.statusCode == 200) {
                                                     console.log(response)
                                                 }else{
@@ -1042,7 +1079,7 @@ module.exports = function(passport){
                     if(employee != null){
                         console.log(employee);
                         
-                        request("http://api.panaceamobile.com/json?action=message_send&username=MaziMuhlari&password=nchongin00&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + " your Mobile Bulletin pin is " + employee.pin + "&from=27726422105", function (error, response, body) {
+                        request("http://api.panaceamobile.com/json?action=message_send&username=ThaboShokgolo&password=P@ssw0rd&to=" + employee.cellphone + "&text=Hi " + employee.firstname + " " + employee.lastname + " your Mobile Bulletin pin is " + employee.pin + "&from=27726422105", function (error, response, body) {
                             if (!error && response.statusCode == 200) {
                                 console.log(response)
                             }else{

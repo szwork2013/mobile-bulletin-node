@@ -101,7 +101,17 @@ block content
                       .form-group
                         div(style='padding-left: 15px; padding-right: 15px;')
                           label(for='content') English Message
-                          textarea.form-control(rows='2', name='content')
+                          textarea.form-control(rows='2', name='english_content')
+                    .col-md-12
+                      .form-group
+                        div(style='padding-left: 15px; padding-right: 15px;')
+                          label(for='content') Zulu Message
+                          textarea.form-control(rows='2', name='zulu_content')
+                    .col-md-12
+                      .form-group
+                        div(style='padding-left: 15px; padding-right: 15px;')
+                          label(for='content') Sotho Message
+                          textarea.form-control(rows='2', name='sotho_content')
                     .col-md-12
                       button.btn.btn-default.pull-right(type='submit') Send Message
               section.panel.panel-default
@@ -113,7 +123,9 @@ block content
                       thead
                         tr
                           th Date
-                          th Content
+                          th English
+                          th Zulu
+                          th Sotho
                           th Group
             // /inner content wrapper
           // /content wrapper
