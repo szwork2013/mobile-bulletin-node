@@ -1145,6 +1145,151 @@ module.exports = function(passport){
                 }
             });
 	});
+    
+    /* GET employees list. */
+	router.get('/api/ussd/language_status', function(req, res) {
+        
+        Employee
+            .findOne()
+            .where({ cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')})
+            .exec(function(err, employee){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(employee);
+                    if(employee != null){
+                        if(req.param('ussd_response_Language') == "2"){
+                            TypeHierarchy
+                                .findOne()
+                                .where({ name: 'LANGUAGE' })
+                                .exec(function(err, result){
+                                    if(err){
+                                        console.log(err);
+                                    }else{
+                                        TypeHierarchy
+                                            .find()
+                                            .where({ parent: result._id })
+                                            .populate('parent')
+                                            .exec(function(err, types){
+                                                if(err){
+                                                    console.log(err);
+                                                }else{                                                    
+                                                    Employee
+                                                        .findOneAndUpdate(
+                                                            { cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')}, 
+                                                            { language : types[0]._id }, 
+                                                            function(err, employee){
+                                                                if(err){
+                                                                    console.log(employee);
+                                                                }else{
+                                                                    console.log(employee);
+                                                                    res.type('text/plain');
+                                                                    res.send("Scaw Metals Group \n\nLanguage \n\n1. Zulu \n2. English [selected] \n3. Sotho \n9. Back \n0. Exit");
+                                                                }
+                                                            }
+                                                        );
+                                                }
+                                            });
+                                    }
+                                });                          
+                        }else if(req.param('ussd_response_Language') == "1"){
+                            TypeHierarchy
+                                .findOne()
+                                .where({ name: 'LANGUAGE' })
+                                .exec(function(err, result){
+                                    if(err){
+                                        console.log(err);
+                                    }else{
+                                        TypeHierarchy
+                                            .find()
+                                            .where({ parent: result._id })
+                                            .populate('parent')
+                                            .exec(function(err, types){
+                                                if(err){
+                                                    console.log(err);
+                                                }else{                                                    
+                                                    Employee
+                                                        .findOneAndUpdate(
+                                                            { cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')}, 
+                                                            { language : types[1]._id }, 
+                                                            function(err, employee){
+                                                                if(err){
+                                                                    console.log(employee);
+                                                                }else{
+                                                                    console.log(employee);
+                                                                    res.type('text/plain');
+                                                                    res.send("Scaw Metals Group \n\nLanguage \n\n1. Zulu [selected] \n2. English \n3. Sotho \n9. Back \n0. Exit");
+                                                                }
+                                                            }
+                                                        );
+                                                }
+                                            });
+                                    }
+                                });                          
+                        }else if(req.param('ussd_response_Language') == "3"){
+                            TypeHierarchy
+                                .findOne()
+                                .where({ name: 'LANGUAGE' })
+                                .exec(function(err, result){
+                                    if(err){
+                                        console.log(err);
+                                    }else{
+                                        TypeHierarchy
+                                            .find()
+                                            .where({ parent: result._id })
+                                            .populate('parent')
+                                            .exec(function(err, types){
+                                                if(err){
+                                                    console.log(err);
+                                                }else{                                                    
+                                                    Employee
+                                                        .findOneAndUpdate(
+                                                            { cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')}, 
+                                                            { language : types[2]._id }, 
+                                                            function(err, employee){
+                                                                if(err){
+                                                                    console.log(employee);
+                                                                }else{
+                                                                    console.log(employee);
+                                                                    res.type('text/plain');
+                                                                    res.send("Scaw Metals Group \n\nLanguage \n\n1. Zulu \n2. English \n3. Sotho [selected] \n9. Back \n0. Exit");
+                                                                }
+                                                            }
+                                                        );
+                                                }
+                                            });
+                                    }
+                                });                          
+                        }else{
+                            Employee
+                                .findOne()
+                                .where({ cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')})
+                                .populate('language')
+                                .exec(function(err, employee){
+                                    if(err){
+                                        console.log(err);
+                                    }else{
+                                        console.log(employee);
+                                        if(employee.language.description == "Zulu"){
+                                            res.type('text/plain');
+                                            res.send("Scaw Metals Group \n\nLanguage \n\n1. Zulu [selected] \n2. English \n3. Sotho \n9. Back \n0. Exit");
+                                        }else if(employee.language.description == "English"){
+                                            res.type('text/plain');
+                                            res.send("Scaw Metals Group \n\nLanguage \n\n1. Zulu \n2. English [selected] \n3. Sotho \n9. Back \n0. Exit");
+                                        }else if(employee.language.description == "Sotho"){
+                                            res.type('text/plain');
+                                            res.send("Scaw Metals Group \n\nLanguage \n\n1. Zulu \n2. English \n3. Sotho [selected] \n9. Back \n0. Exit");
+                                        }else{
+                                            res.type('text/plain');
+                                            res.send("Scaw Metals Group \n\nLanguage \n\n1. Zulu \n2. English \n3. Sotho \n9. Back \n0. Exit");
+                                        }
+                                    }
+                                });
+                        }
+                    }
+                }
+            });
+	});
 
 	return router;
 }
