@@ -1061,6 +1061,90 @@ module.exports = function(passport){
                 }
             });
 	});
+    
+    /* GET employees list. */
+	router.get('/api/ussd/notification_status', function(req, res) {
+        
+        Employee
+            .findOne()
+            .where({ cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')})
+            .exec(function(err, employee){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(employee);
+                    if(employee != null){
+                        console.log(employee);
+                        
+                        if(req.param('ussd_response_Notifications') == "1"){
+                            
+                             if(employee.sms_notifications == true){
+                                 Employee
+                                    .findOneAndUpdate(
+                                        { cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')}, 
+                                        { sms_notifications : 'false' }, 
+                                        function(err, employee){
+                                            if(err){
+                                                console.log(employee);
+                                            }else{
+                                                console.log(employee);
+                                                res.type('text/plain');
+                                                res.send("Scaw Metals Group \n\nNotifications \n\n1. Turn on SMS Notifications \n9. Back \n0. Exit");
+                                            }
+                                        }
+                                    );
+                             }else if(employee.sms_notifications == false){                                 
+                                 Employee
+                                    .findOneAndUpdate(
+                                        { cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')}, 
+                                        { sms_notifications : true }, 
+                                        function(err, employee){
+                                            if(err){
+                                                console.log(employee);
+                                            }else{
+                                                console.log(employee);
+                                                res.type('text/plain');
+                                                res.send("Scaw Metals Group \n\nNotifications \n\n1. Turn off SMS Notifications \n9. Back \n0. Exit");
+                                            }
+                                        }
+                                    );
+                             }
+                            
+                        }else{
+                            if(employee.sms_notifications == true){
+                                 Employee
+                                    .findOne()
+                                    .where({ cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')})
+                                    .exec(function(err, employee){
+                                            if(err){
+                                                console.log(employee);
+                                            }else{
+                                                console.log(employee);
+                                                res.type('text/plain');
+                                                res.send("Scaw Metals Group \n\nNotifications \n\n1. Turn off SMS Notifications \n9. Back \n0. Exit");
+                                            }
+                                        }
+                                    );
+                             }else if(employee.sms_notifications == false){                                 
+                                 Employee
+                                    .findOne()
+                                    .where({ cellphone: req.param('ussd_msisdn'),  pin: req.param('ussd_response_Login')})
+                                    .exec(function(err, employee){
+                                            if(err){
+                                                console.log(employee);
+                                            }else{
+                                                console.log(employee);
+                                                res.type('text/plain');
+                                                res.send("Scaw Metals Group \n\nNotifications \n\n1. Turn on SMS Notifications \n9. Back \n0. Exit");
+                                            }
+                                        }
+                                    );
+                             }
+                        }
+                    }
+                }
+            });
+	});
 
 	return router;
 }
