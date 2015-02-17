@@ -902,38 +902,32 @@ module.exports = function(passport){
     
     /* GET dashboard page. */
 	router.get('/admin/dashboard', isAuthenticated, function(req, res) {
-        
-        var totalEmployees = 0;
-        var totalActiveEmployees = 0;
-        var totalMessages = 0;
-        
-        Employee.find().count().exec(function(err, employee){
+
+        Employee.find().count().exec(function(err, totalEmployees){
             if(err){
-                totalActiveEmployees = 0;
+                console.log(err);
             }else{
-                totalEmployees = employee;
+                console.log(totalEmployees);
                 
-                Employee.find({active: true}).count().exec(function(err, employee){
+                Employee.find({active: true}).count().exec(function(err, totalActiveEmployees){
                     if(err){
-                        totalActiveEmployees = 0;
+                        console.log(err);
                     }else{
-                        totalActiveEmployees = employee;
+                        console.log(totalActiveEmployees);
                         
-                        Message.find().count().exec(function(err, employee){
+                        Message.find().count().exec(function(err, totalMessages){
                             if(err){
-                                totalMessages = 0;
+                                console.log(err);
                             }else{
-                                totalMessages = employee;
+                                console.log(totalMessages);
                                 
                                 // Display the Login page with any flash message, if any
         
                                 res.render('admin/dashboard', { 
-                                    user: req.user, 
-                                    locals: {
-                                        totalEmployees: totalEmployees, 
-                                        totalActiveEmployees: totalActiveEmployees,
-                                        totalMessages: totalMessages
-                                    }
+                                    user: req.user,
+                                    totalEmployees: totalEmployees, 
+                                    totalActiveEmployees: totalActiveEmployees,
+                                    totalMessages: totalMessages
                                 });
                                 
                             }
