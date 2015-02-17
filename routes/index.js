@@ -903,19 +903,19 @@ module.exports = function(passport){
     /* GET dashboard page. */
 	router.get('/admin/dashboard', isAuthenticated, function(req, res) {
 
-        Employee.find().count().exec(function(err, totalEmployees){
+        Employee.find({_created_by: req.user._id}).count().exec(function(err, totalEmployees){
             if(err){
                 console.log(err);
             }else{
                 console.log(totalEmployees);
                 
-                Employee.find({active: true}).count().exec(function(err, totalActiveEmployees){
+                Employee.find({active: true, _created_by: req.user._id}).count().exec(function(err, totalActiveEmployees){
                     if(err){
                         console.log(err);
                     }else{
                         console.log(totalActiveEmployees);
                         
-                        Message.find().count().exec(function(err, totalMessages){
+                        Message.find({_created_by: req.user._id}).count().exec(function(err, totalMessages){
                             if(err){
                                 console.log(err);
                             }else{
