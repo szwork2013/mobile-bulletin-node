@@ -902,8 +902,43 @@ module.exports = function(passport){
     
     /* GET dashboard page. */
 	router.get('/admin/dashboard', isAuthenticated, function(req, res) {
+        
+        var totalEmployees = 0;
+        var totalActiveEmployees = 0;
+        var totalMessages = 0;
+        
+        Employee.find().count().exec(function(err, employee){
+            if(err){
+                totalActiveEmployees = 0;
+            }else{
+                totalEmployees = employee;
+            }
+        });
+        
+        Employee.find().count().exec(function(err, employee){
+            if(err){
+                totalActiveEmployees = 0;
+            }else{
+                totalActiveEmployees = employee;
+            }
+        });
+        
+        Message.find().count().exec(function(err, employee){
+            if(err){
+                totalMessages = 0;
+            }else{
+                totalMessages = employee;
+            }
+        });
+        
     	// Display the Login page with any flash message, if any
-		res.render('admin/dashboard', { user: req.user });
+        
+		res.render('admin/dashboard', { 
+            user: req.user, 
+            totalEmployees: totalEmployees, 
+            totalActiveEmployess: totalActiveEmployees,
+            totalMessages: totalMessages
+        });
 	});
     
     /* GET settings page. */
