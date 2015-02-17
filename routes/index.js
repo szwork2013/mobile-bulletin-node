@@ -912,32 +912,35 @@ module.exports = function(passport){
                 totalActiveEmployees = 0;
             }else{
                 totalEmployees = employee;
+                
+                Employee.find({active: true}).count().exec(function(err, employee){
+                    if(err){
+                        totalActiveEmployees = 0;
+                    }else{
+                        totalActiveEmployees = employee;
+                        
+                        Message.find().count().exec(function(err, employee){
+                            if(err){
+                                totalMessages = 0;
+                            }else{
+                                totalMessages = employee;
+                                
+                                // Display the Login page with any flash message, if any
+        
+                                res.render('admin/dashboard', { 
+                                    user: req.user, 
+                                    totalEmployees: totalEmployees, 
+                                    totalActiveEmployess: totalActiveEmployees,
+                                    totalMessages: totalMessages
+                                });
+                                
+                            }
+                        });
+                        
+                    }
+                });
+                
             }
-        });
-        
-        Employee.find({active: true}).count().exec(function(err, employee){
-            if(err){
-                totalActiveEmployees = 0;
-            }else{
-                totalActiveEmployees = employee;
-            }
-        });
-        
-        Message.find().count().exec(function(err, employee){
-            if(err){
-                totalMessages = 0;
-            }else{
-                totalMessages = employee;
-            }
-        });
-        
-    	// Display the Login page with any flash message, if any
-        
-		res.render('admin/dashboard', { 
-            user: req.user, 
-            totalEmployees: totalEmployees, 
-            totalActiveEmployess: totalActiveEmployees,
-            totalMessages: totalMessages
         });
 	});
     
