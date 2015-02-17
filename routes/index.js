@@ -915,7 +915,7 @@ module.exports = function(passport){
             }
         });
         
-        Employee.find().count().exec(function(err, employee){
+        Employee.find({active: true}).count().exec(function(err, employee){
             if(err){
                 totalActiveEmployees = 0;
             }else{
