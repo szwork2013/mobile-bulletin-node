@@ -929,9 +929,11 @@ module.exports = function(passport){
         
                                 res.render('admin/dashboard', { 
                                     user: req.user, 
-                                    totalEmployees: req.flash('totalEmployees', totalEmployees),
-                                    totalActiveEmployees: req.flash('totalActiveEmployees',totalActiveEmployees),
-                                    totalMessages: req.flash('totalMessages',totalMessages)
+                                    locals: {
+                                        totalEmployees: totalEmployees, 
+                                        totalActiveEmployees: totalActiveEmployees,
+                                        totalMessages: totalMessages
+                                    }
                                 });
                                 
                             }

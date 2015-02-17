@@ -89,9 +89,9 @@ block content
                   section.dash-tile
                     .tile-title ALL TIME EMPLOYEE REGISTRATION
                     .tile-stats
-                      b #{totalActiveEmployees}
+                      b #{locals.totalActiveEmployees}
                     .progress.progress-xs.mt5.mb10
-                      .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='#{totalActiveEmployees}', aria-valuemin='0', aria-valuemax='#{totalEmployees}', style='width: 40%')
+                      .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='#{locals.totalActiveEmployees}', aria-valuemin='0', aria-valuemax='#{locals.totalEmployees}', style='width: 40%')
                     .tile-footer
                       | Compared to total employees
                 .col-md-4.col-sm-4.col-xs-12
@@ -102,7 +102,7 @@ block content
                         | 100%
                       span ALL TIME MESSAGES
                     .tile-stats
-                      b #{totalMessages}
+                      b #{locals.totalMessages}
                     .mb20
                     .tile-chart.tile-line
                     .tile-footer
