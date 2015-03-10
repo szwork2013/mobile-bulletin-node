@@ -1,3 +1,3 @@
 module.exports = {
-  'url' : 'mongodb://localhost:27000/?replicaSet=MobileBulletin'
+  'url' : 'mongodb://mbdb:strongword@localhost:27000,localhost:27000,localhost:27000/mobilebulletin-prod?replicaSet=MobileBulletin'
 }
