@@ -1,3 +1,4 @@
+var debug = require('debug')('passport-mongo');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -63,3 +64,9 @@ if (app.get('env') === 'development') {
 }
 
 module.exports = app;
+
+app.set('port', process.env.PORT || 80);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
